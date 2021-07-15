@@ -4,7 +4,7 @@ function Logo() {
   return <LogoWrapper>Hamtudy</LogoWrapper>;
 }
 const LogoWrapper = styled.div`
-  color: white;
+  color: #46ad78;
   font-weight: 800;
   font-size: 30px;
 `;

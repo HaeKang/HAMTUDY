@@ -21,10 +21,12 @@ function Header() {
 }
 
 const HeaderWrapper = styled.header`
-  background: #46ad78;
+  all: unset;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 10px 60px;
+  height: 40px;
+  width: 100%;
 `;
 const NavWrapper = styled.nav`
   display: flex;
