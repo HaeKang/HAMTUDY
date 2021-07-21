@@ -1,20 +1,16 @@
 import "./App.css";
-import React from "react";
+import { Route } from "react-router-dom";
 import Header from "./components/Header.js";
-import Search from "./components/Search";
-import StudyRoomCard from "./components/StudyRoomCard";
+
+import Home from "./Home";
+import StudyRoom from "./StudyRoom";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header />
-      <Search />
-
-      <StudyRoomCard
-        host={"박진아"}
-        title={"햄스터 연구"}
-        describe={"햄스터를 직접 관찰해보자 "}
-      ></StudyRoomCard>
+      <Route path="/" exact={true} component={Home} />
+      <Route path="/ENTER_STUDY_ROOM" component={StudyRoom} />
     </div>
   );
 }
