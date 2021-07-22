@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="App">
+    <>
       <Search />
       <Link to="/ENTER_STUDY_ROOM">
         <StudyRoomCard
@@ -14,7 +14,7 @@ function Home() {
           describe={"햄스터를 직접 관찰해보자 "}
         ></StudyRoomCard>
       </Link>
-    </div>
+    </>
   );
 }
 
