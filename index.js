@@ -4,8 +4,8 @@ const app = express()
 
 
 //---------------------- 서버 실행 ----------------------
-app.listen(3000, function(){
-    console.log('서버가 3000번 포트에서 실행중 입니다.');
+app.listen(8080, function(){
+    console.log('서버가 8080번 포트에서 실행중 입니다.');
 })
 
 /* mysql connection
