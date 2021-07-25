@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../styles/colors";
 
-function Chat({ nickname, text, time }) {
+function Chat({ nickname, profile, text, time }) {
   return (
     <ChatBlock>
       <div className="profile"></div>
@@ -18,13 +18,19 @@ function Chat({ nickname, text, time }) {
 }
 
 const ChatBlock = styled.div`
+  margin: 10px 10px;
   display: flex;
+  align-items: center;
   .profile {
     width: 30px;
     height: 30px;
     border-radius: 50px;
     background-color: ${colors.black};
     margin-right: 10px;
+  }
+  .nickname {
+    font-size: 14px;
+    font-weight: bold;
   }
   .chat-time {
     font-size: 8px;
