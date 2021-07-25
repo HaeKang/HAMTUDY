@@ -1,35 +1,40 @@
 import React from "react";
 import styled from "styled-components";
+import colors from "../styles/colors";
 
 function Chat({ nickname, text, time }) {
   return (
     <ChatBlock>
-      <UserInfoBlock>
-        <div className="profile"></div>
-        <div className="nickname">{nickname}</div>
-      </UserInfoBlock>
-      <div className="chat-text">{text}</div>
-      <div className="chat-time">{time}</div>
+      <div className="profile"></div>
+      <div className="nickname-time-chat-text">
+        <div className="nickname-time">
+          <div className="nickname">{nickname}</div>
+          <div className="chat-time">{time}</div>
+        </div>
+        <div className="chat-text">{text}</div>
+      </div>
     </ChatBlock>
   );
 }
 
-const UserInfoBlock = styled.div`
+const ChatBlock = styled.div`
   display: flex;
-  align-items: center;
-  .nickname {
-  }
   .profile {
     width: 30px;
     height: 30px;
     border-radius: 50px;
-    background-color: aqua;
+    background-color: ${colors.black};
+    margin-right: 10px;
   }
-`;
-
-const ChatBlock = styled.div`
   .chat-time {
-    font-size: 12px;
+    font-size: 8px;
+  }
+  .chat-text {
+    font-size: 10px;
+  }
+  .nickname-time {
+    display: flex;
+    align-items: center;
   }
   margin-bottom: 20px;
 `;

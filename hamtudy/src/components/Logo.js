@@ -8,5 +8,6 @@ const LogoWrapper = styled.div`
   color: ${colors.theme};
   font-weight: 800;
   font-size: 30px;
+  cursor: pointer;
 `;
 export default Logo;

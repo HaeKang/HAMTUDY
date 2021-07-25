@@ -8,7 +8,7 @@ import StudyRoom from "./StudyRoom";
 function App() {
   return (
     <div>
-      <Header />
+      <Header></Header>
       <Route path="/" exact={true} component={Home} />
       <Route path="/ENTER_STUDY_ROOM" component={StudyRoom} />
     </div>
