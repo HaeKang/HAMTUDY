@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Chat from "./Chat";
 
-function Chatting() {
-  const [open, setOpen] = useState(false);
-  const onToggle = (e) => {
-    setOpen(!open);
-  };
-  console.log("open", open);
+function Chatting({ open }) {
   return (
     <>
-      <OpenChattingButton onClick={onToggle}>채팅창 보기!</OpenChattingButton>
       {open && (
         <ChattingBlock>
           <ChattingHistory>
@@ -120,9 +114,7 @@ function Chatting() {
     </>
   );
 }
-const OpenChattingButton = styled.button`
-  background-color: white;
-`;
+
 const ChattingBlock = styled.div`
   width: 200px;
   height: 800px;

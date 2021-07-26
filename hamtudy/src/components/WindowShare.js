@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import colors from "../styles/colors";
+import Window from "./Window";
 
 function WindowShare() {
   return (
     <WindowShareBlock>
-      <BottomBlock></BottomBlock>
+      <Window />
     </WindowShareBlock>
   );
 }
@@ -13,14 +15,7 @@ const WindowShareBlock = styled.div`
   flex: 1;
   border: 1px solid blue;
   height: 800px;
-`;
-
-const BottomBlock = styled.div`
-  width: 100%;
-  height: 30px;
-  bottom: 0;
   position: relative;
-  background-color: aqua;
 `;
 
 export default WindowShare;
