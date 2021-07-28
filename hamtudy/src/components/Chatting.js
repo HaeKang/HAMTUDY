@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Chat from "./Chat";
 import colors from "../styles/colors";
 
 function Chatting({ open }) {
+  const [chat, setChat] = useState("");
+
+  const onChage = (e) => {
+    e.preventDefault();
+    setChat(e.target.value);
+    console.log(chat);
+  };
+
   return (
     <>
       {open && (
@@ -108,8 +116,7 @@ function Chatting({ open }) {
             />
           </ChattingHistory>
           <ChattingUtilBox>
-            <ChattingInput placeholder="입력하세요." />
-            <CharringSendButton>전송</CharringSendButton>
+            <ChattingInput onChange={onChage} placeholder="입력하세요." />
           </ChattingUtilBox>
         </ChattingBlock>
       )}

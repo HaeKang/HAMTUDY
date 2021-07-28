@@ -21,6 +21,7 @@ const BottomBlock = styled.div`
   bottom: 0;
   position: absolute;
   display: flex;
+  justify-content: space-around;
   align-items: center;
   .share {
     width: 50px;
