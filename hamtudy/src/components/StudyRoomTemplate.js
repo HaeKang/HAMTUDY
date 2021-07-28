@@ -11,7 +11,9 @@ function StudyRoomTemplate({ children }) {
 
 const StudyRoomTemplateBox = styled.div`
   display: flex;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 800px;
 `;
 
 export default StudyRoomTemplate;

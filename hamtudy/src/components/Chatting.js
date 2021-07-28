@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Chat from "./Chat";
+import colors from "../styles/colors";
 
 function Chatting({ open }) {
   return (
     <>
       {open && (
         <ChattingBlock>
+          <div className="title">채팅</div>
           <ChattingHistory>
             <Chat
               nickname={"진돌"}
@@ -116,32 +118,44 @@ function Chatting({ open }) {
 }
 
 const ChattingBlock = styled.div`
-  width: 200px;
-  height: 800px;
-  border: 1px solid black;
+  background-color: ${colors.white};
+  border-radius: 8px;
+  .title {
+    padding: 20px 30px;
+    background-color: white;
+    font-size: 14px;
+  }
+
+  height: 100%;
 `;
 const ChattingHistory = styled.div`
   width: 100%;
-  height: 95%;
+  height: 80%;
   overflow: scroll;
 `;
 const ChattingUtilBox = styled.div`
-  width: 100%;
-  height: 30px;
+  border-top: 1px solid ${colors.gray};
+  height: 60px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  border-top: 1px solid black;
-  padding: 0 10px;
+  border-radius: 8px;
+  background-color: ${colors.gray};
+  padding-bottom: 20px;
 `;
 const ChattingInput = styled.input`
   border: none;
-  border-bottom: 1px solid black;
+  background-color: transparent;
+  height: 40px;
+  padding: 0 20px;
 `;
 const CharringSendButton = styled.button`
-  background-color: white;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background-color: transparent;
 `;
 
 export default Chatting;

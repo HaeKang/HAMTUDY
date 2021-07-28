@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route } from "react-router-dom";
 import Header from "./components/Header.js";
-
 import Home from "./Home";
 import StudyRoom from "./StudyRoom";
 
