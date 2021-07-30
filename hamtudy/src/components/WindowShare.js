@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import colors from "../styles/colors";
 import Window from "./Window";
 
-function WindowShare() {
+function WindowShare({ share }) {
   return (
     <WindowShareBlock>
-      <Window />
+      <Window share={share} />
     </WindowShareBlock>
   );
 }

@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../styles/colors";
 
-function StudyRoomBottomUtil({ onToggle }) {
+function StudyRoomBottomUtil({ onToggle, onShareClick }) {
   return (
     <BottomBlock>
-      <div className="share">화면공유</div>
+      <div className="share" onClick={onShareClick}>
+        화면공유
+      </div>
       <div className="getout">스터디룸 나가기</div>
       <button onClick={onToggle} className="chatting">
-        채팅 >
+        채팅
       </button>
     </BottomBlock>
   );

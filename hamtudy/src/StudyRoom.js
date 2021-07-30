@@ -9,18 +9,26 @@ import WindowShare from "./components/WindowShare";
 import StudyRoomBottomUtil from "./components/StudyRoomBottomUtil";
 
 function StudyRoom() {
+  const [share, setShare] = useState(false);
+  const onShareClick = () => {
+    setShare(!share);
+  };
+  console.log("share", share);
   const [open, setOpen] = useState(true);
-  const onToggle = (e) => {
+  const onToggle = () => {
     setOpen(!open);
   };
-  console.log("open", open);
+
   return (
     <div className="App">
       <StudyRoomTemplate>
         <TMP>
           <TMP2>
-            <WindowShare />
-            <StudyRoomBottomUtil onToggle={onToggle} />
+            <WindowShare share={share} />
+            <StudyRoomBottomUtil
+              onShareClick={onShareClick}
+              onToggle={onToggle}
+            />
           </TMP2>
           <Chatting open={open}></Chatting>
         </TMP>
