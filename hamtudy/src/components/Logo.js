@@ -1,8 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../styles/colors";
 function Logo() {
-  return <LogoWrapper>Hamtudy</LogoWrapper>;
+  return (
+    <Link to="/">
+      <LogoWrapper>Hamtudy</LogoWrapper>)
+    </Link>
+  );
 }
 const LogoWrapper = styled.div`
   color: ${colors.theme};
