@@ -37,10 +37,13 @@ const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
-  width: 100%;
+  height: 64px;
+  width: 1200px;
 `;
 const NavWrapper = styled.nav`
   display: flex;
+  li {
+    margin-left: 10px;
+  }
 `;
 export default Header;

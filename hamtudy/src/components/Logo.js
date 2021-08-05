@@ -5,7 +5,7 @@ import colors from "../styles/colors";
 function Logo() {
   return (
     <Link to="/">
-      <LogoWrapper>Hamtudy</LogoWrapper>)
+      <LogoWrapper>Hamtudy</LogoWrapper>
     </Link>
   );
 }
