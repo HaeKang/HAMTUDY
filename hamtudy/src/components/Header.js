@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./Modals/Modal";
 import styled from "styled-components";
 import Logo from "./Logo";
 
 function Header() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(!modalOpen);
+  };
   return (
     <>
       <HeaderWrapper>
         <Logo />
         <NavWrapper>
           <li>
-            <a href="">로그인</a>
+            <div onClick={openModal}>로그인</div>
+            <Modal open={modalOpen} close={closeModal} header="modal heading">
+              dd
+            </Modal>
           </li>
           <li>
             <a href="">회원가입</a>
@@ -25,10 +37,13 @@ const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
-  width: 100%;
+  height: 64px;
+  width: 1200px;
 `;
 const NavWrapper = styled.nav`
   display: flex;
+  li {
+    margin-left: 10px;
+  }
 `;
 export default Header;
