@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const port = 8080;
 
+var connection = require("./mysql_con");
+
 app.use(cors());
 
 
@@ -16,5 +18,21 @@ app.get('/', function(req,res){
 });
 
 
-var testRouter = require('./routes/index.js');
-app.use('/test_api', testRouter);
+
+// 로그인 https://wonit.tistory.com/305
+app.post('/login', function(req,res){
+    var id = req.body.user_id;
+    var pw = req.body.user_pw;
+    
+	var sql = 'select useridx, user_nick from user where user_id = ? and user_pw = ?';
+    connection.query(sql, [id,pw], function(error,result){
+        if(error){
+            console.log(error);
+        } else{
+            var user_idx = result[0].user_idx;
+            var user_nick = result[0].user_nick
+            res.send({"user_idx" : user_idx, "user_nick" : user_nick});
+        }
+    })
+});
+

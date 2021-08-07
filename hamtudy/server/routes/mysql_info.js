@@ -1,6 +1,6 @@
 const mysql_host = "localhost";
 const mysql_usr = 'root';
-const mysql_pw = '';
+const mysql_pw = 'asdf1234!';
 const mysql_port = 3306;
 const mysql_db = 'hamtudy';
 
