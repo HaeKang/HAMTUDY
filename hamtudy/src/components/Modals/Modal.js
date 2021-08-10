@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 // import "./modal.css";
+import axios from "axios";
 import styled from "styled-components";
 import colors from "../../styles/colors";
-import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../modules/service";
+import { userLogin } from "../../modules/userService";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
@@ -26,22 +26,10 @@ const Modal = (props) => {
 
   const onClick = () => {
     try {
-      login({ id, pwd });
+      dispatch(userLogin(id, pwd));
     } catch (e) {
       alert("로그인 실패!");
     }
-  };
-  const login = ({ id, pwd }) => {
-    axios({
-      method: "post",
-      url: "http://3.142.49.52:8080/login",
-      data: {
-        user_id: id,
-        user_pw: pwd,
-      },
-    }).then((res) => {
-      console.log(res);
-    });
   };
 
   return (
