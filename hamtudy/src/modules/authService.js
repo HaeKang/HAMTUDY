@@ -4,7 +4,7 @@ export const setAuth = (auth) => ({
   auth,
 });
 
-export default function authUser(state = { auth: null }, action) {
+export default function authUser(state = {}, action) {
   switch (action.type) {
     case AUTH_USER:
       return {

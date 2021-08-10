@@ -5,7 +5,8 @@ import styled from "styled-components";
 import colors from "../../styles/colors";
 
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../modules/userService";
+import { successLogin, userLogin } from "../../modules/userService";
+import authUser from "../../modules/authService";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
@@ -26,7 +27,20 @@ const Modal = (props) => {
 
   const onClick = () => {
     try {
-      dispatch(userLogin(id, pwd));
+      axios
+        .post("http://3.142.49.52:8080/login", {
+          user_id: id,
+          user_pw: pwd,
+        })
+        .then((res) => {
+          //TODO: 로그인 성공 후 history push("/") 해야함 모달에서 어케하냐
+          dispatch(successLogin(res.data.user_id, res.data.user_nick));
+        })
+        .catch((err) => {
+          //FIXME: 로그인 실패시 팝업창이 뜨지않음
+          console.log("ㄴㄴ", err);
+          alert("틀렷는데용");
+        });
     } catch (e) {
       alert("로그인 실패!");
     }

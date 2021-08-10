@@ -1,32 +1,25 @@
 import axios from "axios";
-import { LOGIN_REQUEST } from "./type";
+import { LOGIN_REQUEST, SUCCESS_LOGIN } from "./type";
 
-const initial_state = { id: "", nickname: "" };
+const initial_state = { id: "", nickname: "", auth: "visitor" };
 
-export const userLogin = function (id, pwd) {
-  const request = axios.post("http://3.142.49.52:8080/login", {
-    user_id: id,
-    user_pw: pwd,
-  });
+export const successLogin = function (id, nickname) {
   return {
-    type: LOGIN_REQUEST,
-    payload: request,
+    type: SUCCESS_LOGIN,
+    payload: { id, nickname },
   };
 };
 
+//FIXME  리듀서 정리좀 해...
+
 export default function testReducer(state = initial_state, action) {
   switch (action.type) {
-    case LOGIN_REQUEST:
-      // const request = axios
-      //   .post("http://3.142.49.52:8080/login", {
-      //     user_id: action.id,
-      //     user_pw: action.pwd,
-      //   })
-      //   .then((res) => {
-      //     console.log("성공", res);
-      //   })
-      //   .catch((err) => console.log("실패", err));
-      return console.log("Dd", action.payload);
+    case SUCCESS_LOGIN:
+      return {
+        id: action.payload.id,
+        nickname: action.payload.nickname,
+        auth: "user",
+      };
 
     default:
       return state;
