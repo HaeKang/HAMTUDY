@@ -24,16 +24,16 @@ app.get('/', function(req,res){
 app.post('/login', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
-	
-	console.log(req);    
+
 	var sql = 'select useridx, user_nick from user where user_id = ? and user_pw = ?';
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
         } else{
-            var user_idx = result[0].useridx;
-            var user_nick = result[0].user_nick
-            res.send({"user_idx" : user_idx, "user_nick" : user_nick});
+            var user_idx = result[0].user_idx;
+            var user_nick = result[0].user_nick;
+            var user_id = id;
+            res.send({"user_id" : user_id,  "user_idx" : user_idx, "user_nick" : user_nick});
         }
     })
 });
