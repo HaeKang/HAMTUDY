@@ -20,20 +20,18 @@ function StudyRoom() {
   };
 
   return (
-    <div className="App">
-      <StudyRoomTemplate>
-        <TMP>
-          <TMP2>
-            <WindowShare share={share} />
-            <StudyRoomBottomUtil
-              onShareClick={onShareClick}
-              onToggle={onToggle}
-            />
-          </TMP2>
-          <Chatting open={open}></Chatting>
-        </TMP>
-      </StudyRoomTemplate>
-    </div>
+    <StudyRoomTemplate>
+      <TMP>
+        <TMP2>
+          <WindowShare share={share} />
+          <StudyRoomBottomUtil
+            onShareClick={onShareClick}
+            onToggle={onToggle}
+          />
+        </TMP2>
+        <Chatting open={open}></Chatting>
+      </TMP>
+    </StudyRoomTemplate>
   );
 }
 const TMP2 = styled.div`

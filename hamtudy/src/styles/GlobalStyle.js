@@ -10,6 +10,17 @@ body {
   flex-direction: center;
   justify-content: center;
   width: 1400px;
+  list-style: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  cursor: pointer;
 }
 `;
 export default GlobalStyle;

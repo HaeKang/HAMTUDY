@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import colors from "../styles/colors";
 import CategoryList from "./CategoryList";
@@ -6,14 +6,21 @@ import CategoryList from "./CategoryList";
 const categories = ["햄스토", "토익", "알고리즘", "윤영미교수님", "나물이"];
 
 function Search() {
+  const [value, setValue] = useState("");
+  const onChange = (e) => {
+    setValue(e.target.value);
+    console.log(value);
+  };
+
   return (
     <>
       <SearchWrapper>
-        <div>
+        <div className="search">
           <SearchInput
             type="text"
             name="query"
-            placeholder="스터디룸을 찾아보아용~"
+            placeholder="오늘은 어떤 공부를 하면 좋을까?"
+            onChange={onChange}
           />
           <SearchButton type="submit">🔍</SearchButton>
         </div>
@@ -23,12 +30,14 @@ function Search() {
   );
 }
 const SearchWrapper = styled.div`
-  border: 1px solid black;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-bottom: 80px;
+  .search {
+    background-color: ${colors.gray};
+  }
 `;
 const SearchButton = styled.button`
   border: none;
@@ -37,7 +46,8 @@ const SearchButton = styled.button`
 const SearchInput = styled.input`
   border: none;
   font-size: 14px;
-  background-color: ${colors.gray};
+  width: 400px;
   padding: 10px 20px;
+  background-color: transparent;
 `;
 export default Search;
