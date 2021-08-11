@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, SET_USER } from "./type";
+import { LOGIN_SUCCESS, AUTH_USER, LOGOUT_REQUEST } from "./type";
 //TODO 로그인 세션 토큰 해야한다
 
 const initial_state = {
@@ -17,8 +17,12 @@ export const successLogin = function (id, nickname) {
   };
 };
 
-export const setAuth = ({ id, nickname, token }) => ({
-  type: SET_USER,
+export const logoutRequest = () => ({
+  type: LOGOUT_REQUEST,
+});
+
+export const authUser = ({ id, nickname, token }) => ({
+  type: AUTH_USER,
   payload: {
     id,
     nickname,
@@ -39,7 +43,17 @@ export default function authReducer(state = initial_state, action) {
         },
         auth: "SUCCESS",
       };
-    case SET_USER:
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        auth: null,
+        userInfo: {
+          id: "",
+          nickname: "",
+          token: "",
+        },
+      };
+    case AUTH_USER:
       return {
         ...state,
         auth: "SUCCESS",

@@ -6,7 +6,6 @@ import colors from "../../styles/colors";
 
 import { useDispatch, useSelector } from "react-redux";
 import { successLogin, userLogin } from "../../modules/userService";
-import authUser from "../../modules/authService";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
