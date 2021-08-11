@@ -33,13 +33,18 @@ const Modal = (props) => {
           user_pw: pwd,
         })
         .then((res) => {
-          //TODO: 로그인 성공 후 history push("/") 해야함 모달에서 어케하냐
           dispatch(successLogin(res.data.user_id, res.data.user_nick));
+          localStorage.setItem(
+            "userInfo",
+            JSON.stringify({
+              id: res.data.user_id,
+              nickname: res.data.user_nick,
+            })
+          );
+          close();
         })
         .catch((err) => {
-          //FIXME: 로그인 실패시 팝업창이 뜨지않음
-          console.log("ㄴㄴ", err);
-          alert("틀렷는데용");
+          alert("아이디 또는 비밀번호가 틀렸습니다.");
         });
     } catch (e) {
       alert("로그인 실패!");
