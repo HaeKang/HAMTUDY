@@ -18,7 +18,7 @@ function App() {
       <GlobalStyle />
       <Header></Header>
       <Route path="/" exact={true} component={Home} />
-      <Route path="/ENTER_STUDY_ROOM" component={StudyRoom} />
+      <Route path="/:room" component={StudyRoom} />
     </>
   );
 }

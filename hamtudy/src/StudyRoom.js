@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { Route } from "react-router";
 import styled from "styled-components";
-import GlobalStyle from "./styles/GlobalStyle";
 
 import Chatting from "./components/Chatting";
 import StudyRoomTemplate from "./components/StudyRoomTemplate";
