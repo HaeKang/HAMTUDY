@@ -9,7 +9,6 @@ function Search() {
   const [value, setValue] = useState("");
   const onChange = (e) => {
     setValue(e.target.value);
-    console.log(value);
   };
 
   return (

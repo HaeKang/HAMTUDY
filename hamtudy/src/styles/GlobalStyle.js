@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import colors from "./colors";
 const GlobalStyle = createGlobalStyle`
 * {
     margin: 0;
@@ -12,15 +13,15 @@ body {
   width: 1400px;
   list-style: none;
 }
+input:focus {outline:none;}
+a {
+  :link{text-decoration: none;}
+  :visited{
+    text-decoration: none;
+    color: ${colors.black};
+  }
+  :hover {cursor: pointer;}
+}
 
-a:link {
-  text-decoration: none;
-}
-a:visited {
-  text-decoration: none;
-}
-a:hover {
-  cursor: pointer;
-}
 `;
 export default GlobalStyle;

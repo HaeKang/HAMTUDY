@@ -64,6 +64,7 @@ const NavWrapper = styled.nav`
   display: flex;
   li {
     margin-left: 10px;
+    cursor: pointer;
   }
 `;
 export default Header;

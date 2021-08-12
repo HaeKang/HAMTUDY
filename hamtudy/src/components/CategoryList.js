@@ -10,7 +10,7 @@ function CategoryList({ categories }) {
   return (
     <div>
       {categories.map((category) => (
-        <CategoryButton category={category}></CategoryButton>
+        <CategoryButton category={category} key={category}></CategoryButton>
       ))}
     </div>
   );

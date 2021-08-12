@@ -1,19 +1,47 @@
 import React from "react";
 import Search from "./components/Search";
-import StudyRoomCard from "./components/StudyRoomCard";
+import StudyRoomList from "./components/StudyRoomList";
 import HomeTemplate from "./components/HomeTemplate";
+
+const SAMPLE_STUDY_ROOMS = [
+  {
+    title: "조용히 공부하실 분 오세요🤫",
+    describe: "각자 원하는 공부해요",
+    participants: 24,
+  },
+  {
+    title: "토익공부하는 사람?",
+    describe: "각자 원하는 공부해요",
+    participants: 24,
+  },
+  {
+    title: "토익공부하는 사람?",
+    describe: "각자 원하는 공부해요",
+    participants: 24,
+  },
+  {
+    title: "조용히 공부하실 분 오세요🤫",
+    describe: "각자 원하는 공부해요",
+    participants: 24,
+  },
+  {
+    title: "토익공부하는 사람?",
+    describe: "각자 원하는 공부해요",
+    participants: 24,
+  },
+  {
+    title: "토익공부하는 사람?",
+    describe: "각자 원하는 공부해요",
+    participants: 24,
+  },
+];
 
 function Home() {
   return (
     <>
       <HomeTemplate>
         <Search />
-
-        <StudyRoomCard
-          host={"박진아"}
-          title={"햄스터 연구"}
-          describe={"햄스터를 직접 관찰해보자 "}
-        ></StudyRoomCard>
+        <StudyRoomList data={SAMPLE_STUDY_ROOMS} />
       </HomeTemplate>
     </>
   );
