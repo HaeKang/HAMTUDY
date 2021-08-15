@@ -67,11 +67,6 @@ app.post('/listStudyRoom', function(req, res){
             console.log(error);
             res.send({"state" : "실패"});
         } else{
-            var room_id = result[0].room_id;
-            var user_idx = result[0].user_idx;
-            var title = result[0].title;
-            var descr = result[0].descr;
-
             res.send(result);
         }
     });
@@ -90,12 +85,8 @@ app.post('/listMyStudyRoom', function(req, res){
             console.log(error);
             res.send({"state" : "실패"});
         } else{
-            var room_id = result[0].room_id;
-            var user_idx = result[0].user_idx;
-            var title = result[0].title;
-            var descr = result[0].descr;
 
-            res.send({"room_id" : room_id,  "user_idx" : user_idx, "title" : title, "descr" : descr });
+            res.send(result);
         }
     });
 
