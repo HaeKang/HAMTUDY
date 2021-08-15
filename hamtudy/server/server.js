@@ -62,7 +62,7 @@ app.post('/listStudyRoom', function(req, res){
     // room_id, user_idx, title, descr
     var sql = 'select * from room_list';
 
-    connection.query(sql, [user_idx], function(error,result){
+    connection.query(sql,  function(error,result){
         if(error){
             console.log(error);
             res.send({"state" : "실패"});
