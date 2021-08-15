@@ -6,14 +6,28 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
 }
-body {
+
+
+body{
   display: flex;
-  flex-direction: center;
+  align-items: center;
   justify-content: center;
-  width: 1400px;
   list-style: none;
 }
-input:focus {outline:none;}
+
+
+
+
+
+button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+input {
+  border: none;
+  :focus{outline:none;}
+}
 a {
   :link{text-decoration: none;}
   :visited{

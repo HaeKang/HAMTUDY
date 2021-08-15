@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import { Link } from "react-router-dom";
 import Modal from "./Modals/Modal";
 import styled from "styled-components";
 import Logo from "./Logo";
@@ -26,6 +26,11 @@ function Header() {
         <Logo />
         {auth == "SUCCESS" && (
           <NavWrapper>
+            <li>
+              <Link to="/create_study_room">
+                <div>방만들기</div>
+              </Link>
+            </li>
             <li>
               <div>내정보</div>
             </li>
@@ -53,7 +58,6 @@ function Header() {
 }
 
 const HeaderWrapper = styled.header`
-  all: unset;
   display: flex;
   align-items: center;
   justify-content: space-between;

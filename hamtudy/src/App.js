@@ -6,6 +6,7 @@ import Home from "./Home";
 import StudyRoom from "./StudyRoom";
 import GlobalStyle from "./styles/GlobalStyle";
 import { authUser } from "./modules/userService";
+import CreateStudyRoom from "./components/CreateStudyRoom";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +19,8 @@ function App() {
       <GlobalStyle />
       <Header></Header>
       <Route path="/" exact={true} component={Home} />
-      <Route path="/:room" component={StudyRoom} />
+      <Route path="/room/:room" component={StudyRoom} />
+      <Route path="/create_study_room" component={CreateStudyRoom} />
     </>
   );
 }

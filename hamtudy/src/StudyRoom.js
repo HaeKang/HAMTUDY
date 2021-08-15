@@ -12,7 +12,7 @@ function StudyRoom() {
     setShare(!share);
   };
   console.log("share", share);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const onToggle = () => {
     setOpen(!open);
   };

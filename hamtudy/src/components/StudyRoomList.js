@@ -6,7 +6,7 @@ import colors from "../styles/colors";
 function StudyRoomCard({ host, title, describe }) {
   return (
     <CardWrapper>
-      <Link to={"/" + title}>
+      <Link to={"/room/" + title}>
         <div className="title">
           <h2>{title}</h2>
         </div>
@@ -19,7 +19,6 @@ function StudyRoomCard({ host, title, describe }) {
   );
 }
 function StudyRoomList({ data }) {
-  console.log(data);
   return (
     <CardsWrapper>
       {data.map((studyroom) => (
