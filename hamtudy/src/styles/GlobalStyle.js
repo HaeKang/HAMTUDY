@@ -6,19 +6,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
 }
-
-
 body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
   list-style: none;
 }
-
-
-
-
-
 button{
   background-color: transparent;
   border: none;

@@ -10,9 +10,16 @@ function HomeTemplate({ children }) {
 }
 
 const HomeTemplateBox = styled.div`
-  height: 800px;
   width: 1200px;
+  height: 100%;
+  background-color: aliceblue;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  /* align-items: center;
+  display: flex;
   align-items: center;
+  justify-content: center; */
 `;
 
 export default HomeTemplate;

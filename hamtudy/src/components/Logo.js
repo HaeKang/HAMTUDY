@@ -10,7 +10,7 @@ function Logo() {
   );
 }
 const LogoWrapper = styled.div`
-  color: ${colors.theme};
+  color: ${colors.black};
   font-weight: 800;
   font-size: 30px;
   cursor: pointer;

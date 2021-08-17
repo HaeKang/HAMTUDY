@@ -40,7 +40,6 @@ function Home() {
   return (
     <>
       <HomeTemplate>
-        <Search />
         <StudyRoomList data={SAMPLE_STUDY_ROOMS} />
       </HomeTemplate>
     </>

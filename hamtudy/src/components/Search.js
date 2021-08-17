@@ -3,6 +3,7 @@ import styled from "styled-components";
 import colors from "../styles/colors";
 import CategoryList from "./CategoryList";
 
+//FIXME categories delete
 const categories = ["햄스토", "토익", "알고리즘", "윤영미교수님", "나물이"];
 
 function Search() {
@@ -23,17 +24,15 @@ function Search() {
           />
           <SearchButton type="submit">🔍</SearchButton>
         </div>
-        <CategoryList categories={categories}></CategoryList>
+        {/* <CategoryList categories={categories}></CategoryList> */}
       </SearchWrapper>
     </>
   );
 }
 const SearchWrapper = styled.div`
-  width: 100%;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  flex-direction: column;
-  margin-bottom: 80px;
+  flex-direction: column; */
   .search {
     background-color: ${colors.gray};
   }
