@@ -33,9 +33,11 @@ function StudyRoom() {
                 />
               </div>
             </div>
-            <div className="chat">
-              <Chatting open={open}></Chatting>
-            </div>
+            {open && (
+              <div className="chat">
+                <Chatting open={open}></Chatting>
+              </div>
+            )}
           </div>
         </div>
       </Wrapper>
