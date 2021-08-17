@@ -7,6 +7,7 @@ const SAMPLE_STUDY_ROOMS = [
   {
     title: "조용히 공부하실 분 오세요🤫",
     describe: "각자 원하는 공부해요",
+    color: "#12b886",
     participants: 24,
   },
   {

@@ -22,9 +22,7 @@ function Header() {
   const logout = () => {
     dispatch(logoutRequest());
   };
-  const onHover = () => {
-    console.log("dd");
-  };
+  const onHover = () => {};
   return (
     <>
       <HeaderWrapper>
@@ -73,12 +71,13 @@ const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
+  height: 60px;
   padding: 0 50px;
   border-bottom: 1px solid ${colors.black};
 `;
 const NavWrapper = styled.nav`
   display: flex;
+  align-items: center;
   li {
     margin-left: 10px;
     cursor: pointer;
