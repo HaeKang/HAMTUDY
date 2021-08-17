@@ -4,13 +4,22 @@ import styled from "styled-components";
 function StudyRoomTemplate({ children }) {
   return (
     <>
-      <StudyRoomTemplateBox>{children}</StudyRoomTemplateBox>
+      <StudyRoomTemplateBox>
+        <div className="wrapper">{children}</div>
+      </StudyRoomTemplateBox>
     </>
   );
 }
 
 const StudyRoomTemplateBox = styled.div`
-  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .wrapper {
+    width: 1200px;
+    height: 800px;
+    background-color: azure;
+  }
 `;
 
 export default StudyRoomTemplate;

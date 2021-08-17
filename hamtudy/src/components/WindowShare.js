@@ -11,9 +11,7 @@ function WindowShare({ share }) {
 }
 
 const WindowShareBlock = styled.div`
-  border: 1px solid blue;
-  width: 1200px;
-  height: 800px;
+  height: 100%;
 `;
 
 export default WindowShare;
