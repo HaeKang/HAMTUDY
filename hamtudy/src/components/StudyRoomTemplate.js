@@ -18,7 +18,6 @@ const StudyRoomTemplateBox = styled.div`
   .wrapper {
     width: 1200px;
     height: 800px;
-    background-color: azure;
   }
 `;
 

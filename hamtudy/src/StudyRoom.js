@@ -65,12 +65,10 @@ const Wrapper = styled.div`
         flex: 7;
       }
       .util {
-        background-color: gray;
         flex: 1;
       }
     }
     .chat {
-      background-color: blue;
       flex: 1;
     }
   }

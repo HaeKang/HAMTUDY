@@ -17,7 +17,7 @@ function Chatting({ open }) {
       {open && (
         <ChattingBlock>
           <div className="title">채팅</div>
-          <ChattingHistory>
+          <div className="chatting-history">
             <Chat
               nickname={"진돌"}
               text={"후아암 리액트는 어려어~"}
@@ -114,10 +114,12 @@ function Chatting({ open }) {
               text={"후아암 리액트는 어려어~"}
               time={"3:30"}
             />
-          </ChattingHistory>
-          <ChattingUtilBox>
-            <ChattingInput onChange={onChage} placeholder="입력하세요." />
-          </ChattingUtilBox>
+          </div>
+          <div className="chatting-util">
+            <ChattingUtilBox>
+              <ChattingInput onChange={onChage} placeholder="입력하세요." />
+            </ChattingUtilBox>
+          </div>
         </ChattingBlock>
       )}
     </>
@@ -125,21 +127,32 @@ function Chatting({ open }) {
 }
 
 const ChattingBlock = styled.div`
-  background-color: ${colors.white};
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   .title {
     padding: 20px 30px;
     background-color: white;
     font-size: 14px;
   }
-
+  .chatting-history {
+    flex: 10;
+    overflow: scroll;
+    padding-top: 10px;
+  }
+  .chatting-util {
+    flex: 1.2;
+    border-top: 1px solid ${colors.gray};
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    background-color: ${colors.gray};
+    padding-bottom: 20px;
+  }
   height: 100%;
 `;
-const ChattingHistory = styled.div`
-  width: 100%;
-  height: 80%;
-  overflow: scroll;
-`;
+
 const ChattingUtilBox = styled.div`
   border-top: 1px solid ${colors.gray};
   height: 60px;
@@ -155,14 +168,6 @@ const ChattingInput = styled.input`
   background-color: transparent;
   height: 40px;
   padding: 0 20px;
-`;
-const CharringSendButton = styled.button`
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  background-color: transparent;
 `;
 
 export default Chatting;
