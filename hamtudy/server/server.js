@@ -44,7 +44,7 @@ app.post('/createStudyRoom', function(req, res){
     var title = req.body.title;
     var desc = req.body.desc;
 
-    var sql = 'insert into room_list(user_idx, title, descr) values(?, ?, ?)';
+    var sql = 'insert into room_list(user_idx, title, descr, color) values(?, ?, ?, ?)';
 
     connection.query(sql, [user_idx,title,desc], function(error,result){
         if(error){
@@ -78,7 +78,7 @@ app.post('/listStudyRoom', function(req, res){
 app.post('/listMyStudyRoom', function(req, res){
     var user_idx = req.body.user_idx;
 
-    var sql = 'select room_id, user_idx, title, descr from room_list a, user b where a.user_idx = b.useridx and a.user_idx = ?';
+    var sql = 'select room_id, user_idx, title, descr, color from room_list a, user b where a.user_idx = b.useridx and a.user_idx = ?';
 
     connection.query(sql, [user_idx], function(error,result){
         if(error){
@@ -90,4 +90,71 @@ app.post('/listMyStudyRoom', function(req, res){
         }
     });
 
-})
+});
+
+// 스터디룸 참여
+app.post('/joinStudyRoom', function(req, res){
+    var room_id = req.body.room_id;
+    var user_id = req.body.user_id;
+
+    var sql_user_idx = 'select useridx from user where user_id = ?';
+
+    connection.query(sql_user_idx, [user_id], function(error,result){
+        if(error){
+
+            console.log(error);
+            res.send({"state" : "조회실패"});
+
+        } else{
+            var user_idx = result[0].useridx
+            var sql = 'insert into join_info(room_id, user_idx) values(?,?)';
+            connection.query(sql, [room_id, user_idx], function(err, result){
+                if(err){
+                    console.log(err);
+                    res.send({"state" : "삽입실패"});
+                } else{
+                    res.send({"state" : "성공"});
+                }
+            });
+
+        }
+    });
+
+});
+
+// 스터디룸 나가기 [수정]
+app.post('/exitStudyRoom', function(req, res){
+    var room_id = req.body_room_id;
+    var user_id =  req.body.user_id;
+
+    var sql_user_idx = 'select useridx from user where user_id = ?';
+
+    connection.query(sql_user_idx, [user_id], function(error,result){
+        if(error){
+
+            console.log(error);
+            res.send({"state" : "조회실패"});
+
+        } else{
+            var user_idx = result[0].useridx
+            var sql = 'insert into join_info(room_id, user_idx) values(?,?)';
+            connection.query(sql, [room_id, user_idx], function(err, result){
+                if(err){
+                    console.log(err);
+                    res.send({"state" : "삽입실패"});
+                } else{
+                    res.send({"state" : "성공"});
+                }
+            });
+
+        }
+    });
+
+
+});
+
+
+// 스터디룸 들어감 ~ 참여인원 목록, 참여인원 수, 스터디룸 정보
+app.post("/inStudyRoom", function(req, res){
+
+});
