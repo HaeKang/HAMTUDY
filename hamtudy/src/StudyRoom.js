@@ -12,36 +12,66 @@ function StudyRoom() {
     setShare(!share);
   };
   console.log("share", share);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const onToggle = () => {
     setOpen(!open);
   };
 
   return (
     <StudyRoomTemplate>
-      <TMP>
-        <TMP2>
-          <WindowShare share={share} />
-          <StudyRoomBottomUtil
-            onShareClick={onShareClick}
-            onToggle={onToggle}
-          />
-        </TMP2>
-        <Chatting open={open}></Chatting>
-      </TMP>
+      <Wrapper>
+        <div className="wrapper">
+          <div className="roomContainer">
+            <div className="share">
+              <div className="window">
+                <WindowShare share={share} />
+              </div>
+              <div className="util">
+                <StudyRoomBottomUtil
+                  onShareClick={onShareClick}
+                  onToggle={onToggle}
+                />
+              </div>
+            </div>
+            {open && (
+              <div className="chat">
+                <Chatting open={open}></Chatting>
+              </div>
+            )}
+          </div>
+        </div>
+      </Wrapper>
     </StudyRoomTemplate>
   );
 }
-const TMP2 = styled.div`
-  position: relative;
-`;
-const TMP = styled.div`
-  position: relative;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 1px solid blue;
+const Wrapper = styled.div`
+  width: 1200px;
   display: flex;
+  flex-direction: column;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 700px;
+    .roomContainer {
+      display: flex;
+      height: 100%;
+    }
+    .share {
+      flex: 4;
+      display: flex;
+      flex-direction: column;
+      .window {
+        flex: 7;
+      }
+      .util {
+        flex: 1;
+      }
+    }
+    .chat {
+      flex: 1;
+    }
+  }
 `;
 
 export default StudyRoom;

@@ -18,10 +18,8 @@ function StudyRoomBottomUtil({ onToggle, onShareClick }) {
 
 const BottomBlock = styled.div`
   border-top: 1px solid ${colors.gray};
-  width: 100%;
-  height: 80px;
+  height: 100%;
   bottom: 0;
-  position: absolute;
   display: flex;
   justify-content: space-around;
   align-items: center;

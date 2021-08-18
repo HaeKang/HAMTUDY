@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import colors from "../styles/colors";
 
-function RoomThumnail({ title, describe }) {
+function RoomThumnail({ title, describe, color }) {
   return (
-    <ThumnailWrapper>
+    <ThumnailWrapper color={color}>
       <div className="info">
         <h3 className="title">{title}</h3>
         <h3 className="describe">{describe}</h3>
@@ -13,12 +14,17 @@ function RoomThumnail({ title, describe }) {
 }
 
 const ThumnailWrapper = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  /* border-top-left-radius:4px; */
+  /* border-top-right-radius: 4px; */
+  border-radius: 8px;
   width: 350px;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) => props.color || colors.white}};
+  
   .info {
     display: flex;
     flex-direction: column;

@@ -4,15 +4,20 @@ import styled from "styled-components";
 function HomeTemplate({ children }) {
   return (
     <>
-      <HomeTemplateBox>{children}</HomeTemplateBox>
+      <HomeTemplateBox>
+        <div className="wrapper">{children}</div>
+      </HomeTemplateBox>
     </>
   );
 }
 
 const HomeTemplateBox = styled.div`
-  height: 800px;
-  width: 1200px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  .wrapper {
+    width: 1200px;
+  }
 `;
 
 export default HomeTemplate;

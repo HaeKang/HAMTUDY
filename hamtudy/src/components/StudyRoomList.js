@@ -2,31 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../styles/colors";
+import RoomThumnail from "./RoomThumnail";
 
-function StudyRoomCard({ host, title, describe }) {
-  return (
-    <CardWrapper>
-      <Link to={"/room/" + title}>
-        <div className="title">
-          <h2>{title}</h2>
-        </div>
-      </Link>
-      <div className="info">
-        <div>{describe}</div>
-        <div>참여인원:28명</div>
-      </div>
-    </CardWrapper>
-  );
-}
 function StudyRoomList({ data }) {
   return (
     <CardsWrapper>
       {data.map((studyroom) => (
-        <StudyRoomCard
-          title={studyroom.title}
-          describe={studyroom.describe}
-          key={studyroom.title}
-        ></StudyRoomCard>
+        <CardWrapper>
+          <Link to={"/room/" + studyroom.title}>
+            <RoomThumnail
+              title={studyroom.title}
+              describe={studyroom.describe}
+              color={studyroom.color}
+            />
+          </Link>
+          <div>메롱메롱 메롱</div>
+        </CardWrapper>
       ))}
     </CardsWrapper>
   );
@@ -39,26 +30,13 @@ const CardsWrapper = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  width: 370px;
-  height: 300px;
-  border: 1px solid black;
   border-radius: 8px;
   background-color: ${colors.white};
-  .title {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-  }
-  .info {
-    padding: 0 8px;
-  }
+  margin: 10px;
   & {
     margin-top: 40px;
   }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 export default StudyRoomList;
