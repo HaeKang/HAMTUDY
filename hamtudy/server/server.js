@@ -43,10 +43,11 @@ app.post('/createStudyRoom', function(req, res){
     var user_idx = req.body.user_idx;
     var title = req.body.title;
     var desc = req.body.desc;
+    var color = req.body.desc;
 
     var sql = 'insert into room_list(user_idx, title, descr, color) values(?, ?, ?, ?)';
 
-    connection.query(sql, [user_idx,title,desc], function(error,result){
+    connection.query(sql, [user_idx,title,desc,color], function(error,result){
         if(error){
             console.log(error);
             res.send({"state" : "실패"});
@@ -122,7 +123,7 @@ app.post('/joinStudyRoom', function(req, res){
 
 });
 
-// 스터디룸 나가기 [수정]
+// 스터디룸 나가기
 app.post('/exitStudyRoom', function(req, res){
     var room_id = req.body_room_id;
     var user_id =  req.body.user_id;
@@ -137,11 +138,11 @@ app.post('/exitStudyRoom', function(req, res){
 
         } else{
             var user_idx = result[0].useridx
-            var sql = 'insert into join_info(room_id, user_idx) values(?,?)';
+            var sql = 'delete from join_info where room_id = ? and user_idx = ?';
             connection.query(sql, [room_id, user_idx], function(err, result){
                 if(err){
                     console.log(err);
-                    res.send({"state" : "삽입실패"});
+                    res.send({"state" : "삭제실패"});
                 } else{
                     res.send({"state" : "성공"});
                 }
