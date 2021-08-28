@@ -18,7 +18,35 @@ app.get('/', function(req,res){
 	res.send("hello");
 });
 
+// idx를 id로
+app.post('/idxToid', function(req, res){
+    var idx = req.body.user_idx;
+    var sql = 'select user_id from user where user_idx = ?';
+    connection.query(sql, [idx], function(error,result){
+        if(error){
+            console.log(error);
+        } else{
+            var user_id = result[0].user_id;
+            res.send({"user_id" : user_id});
+        }
+    });
 
+});
+
+// id를 idx로
+app.post('/idToidx', function(req, res){
+    var id = req.body.user_id;
+    var sql = 'select user_idx from user where user_id = ?';
+    connection.query(sql, [id], function(error,result){
+        if(error){
+            console.log(error);
+        } else{
+            var user_idx = result[0].user_idx;
+            res.send({"user_idx" : user_idx});
+        }
+    });
+
+});
 
 // 로그인 https://wonit.tistory.com/305
 app.post('/login', function(req,res){
