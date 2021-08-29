@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ function Header() {
   const logout = () => {
     dispatch(logoutRequest());
   };
-  const onHover = () => {};
+
   return (
     <>
       <HeaderWrapper>
@@ -33,18 +33,28 @@ function Header() {
           {auth == "SUCCESS" && (
             <>
               <li>
-                <Link to="/create_study_room">
-                  <div>방만들기</div>
-                </Link>
-              </li>
-              <li>
-                <div className="my-info" onHover={onHover}>
-                  <img className="profile-img" src={profile} />
+                <div className="my-info-wrapper">
+                  <div className="my-info">
+                    <img className="profile-img" src={profile} />
+                  </div>
+                  <div className="dropdown-menu">
+                    <li>
+                      <Link to="/">
+                        <div>내 정보</div>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/create_study_room">
+                        <div>방만들기</div>
+                      </Link>
+                    </li>
+                    <li>
+                      <div onClick={logout}>로그아웃</div>
+                    </li>
+                  </div>
                 </div>
               </li>
-              <li>
-                <div onClick={logout}>로그아웃</div>
-              </li>
+              <li></li>
             </>
           )}
           {!auth && (
@@ -55,9 +65,7 @@ function Header() {
                   open={modalOpen}
                   close={closeModal}
                   header="modal heading"
-                >
-                  dd
-                </Modal>
+                ></Modal>
               </li>
               <li>
                 <a href="">회원가입</a>
@@ -81,6 +89,7 @@ const HeaderWrapper = styled.header`
 const NavWrapper = styled.nav`
   display: flex;
   align-items: center;
+
   li {
     margin-left: 10px;
     cursor: pointer;
@@ -96,6 +105,20 @@ const NavWrapper = styled.nav`
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  .my-info-wrapper:hover .dropdown-menu {
+    display: block;
+  }
+  .dropdown-menu {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    display: none;
+    background-color: ${colors.gray};
+  }
+  .dropdown-menu > li:hover {
+    text-decoration: underline;
   }
 `;
 export default Header;
