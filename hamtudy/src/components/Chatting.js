@@ -148,7 +148,6 @@ const ChattingBlock = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     background-color: ${colors.gray};
-    padding-bottom: 20px;
   }
   height: 100%;
 `;

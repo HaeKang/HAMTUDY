@@ -8,6 +8,7 @@ import Logo from "./Logo";
 import Search from "./Search";
 import { logoutRequest } from "../modules/userService";
 import colors from "../styles/colors";
+import profile from "../img/profile.jpeg";
 
 function Header() {
   const dispatch = useDispatch();
@@ -37,7 +38,9 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <div className="my-info" onHover={onHover}></div>
+                <div className="my-info" onHover={onHover}>
+                  <img className="profile-img" src={profile} />
+                </div>
               </li>
               <li>
                 <div onClick={logout}>로그아웃</div>
@@ -72,7 +75,7 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  padding: 0 50px;
+  padding: 0 150px;
   border-bottom: 1px solid ${colors.black};
 `;
 const NavWrapper = styled.nav`
@@ -86,8 +89,13 @@ const NavWrapper = styled.nav`
     border-radius: 4px;
     width: 30px;
     height: 30px;
-    background-color: black;
     cursor: pointer;
+    overflow: hidden;
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 `;
 export default Header;
