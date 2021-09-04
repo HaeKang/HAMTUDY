@@ -20,8 +20,16 @@ function Header() {
   const closeModal = () => {
     setModalOpen(!modalOpen);
   };
+  //TODO logout localstorage set null
   const logout = () => {
     dispatch(logoutRequest());
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        id: null,
+        nickname: null,
+      })
+    );
   };
 
   return (
@@ -68,7 +76,7 @@ function Header() {
                 ></Modal>
               </li>
               <li>
-                <Link to="/join">
+                <Link to="/sign_up">
                   <div>회원가입</div>
                 </Link>
               </li>

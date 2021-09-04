@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-function JoinTemplate({ children }) {
+function SignUpTemplate({ children }) {
   return (
     <>
-      <JoinTemplateBlock>
+      <SignUpTemplateBlock>
         <div className="wrapper">{children}</div>
-      </JoinTemplateBlock>
+      </SignUpTemplateBlock>
     </>
   );
 }
 
-const JoinTemplateBlock = styled.div`
+const SignUpTemplateBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,4 +20,4 @@ const JoinTemplateBlock = styled.div`
   }
 `;
 
-export default JoinTemplate;
+export default SignUpTemplate;
