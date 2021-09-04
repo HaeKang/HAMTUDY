@@ -48,7 +48,24 @@ app.post('/idToidx', function(req, res){
 
 });
 
-// 로그인 https://wonit.tistory.com/305
+// 회원가입
+app.post('/SignUp', function(req,res){
+    var id = req.body.user_id;
+    var pw = req.body.user_pw;
+    var nickname = req.body.user_nick;
+
+	var sql = 'insert into user(user_id, user_pw, user_nick) values(?,?,?)';
+    connection.query(sql, [id,pw,nickname], function(error,result){
+        if(error){
+            console.log(error);
+            res.send({"state" : "실패"});
+        } else{
+            res.send({"state" : "성공"});
+        }
+    });
+});
+
+// 로그인
 app.post('/login', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
@@ -57,6 +74,7 @@ app.post('/login', function(req,res){
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
+            res.send({"state" : "실패"});
         } else{
             var user_idx = result[0].user_idx;
             var user_nick = result[0].user_nick;
@@ -179,11 +197,5 @@ app.post('/exitStudyRoom', function(req, res){
         }
     });
 
-
-});
-
-
-// 스터디룸 들어감 ~ 참여인원 목록, 참여인원 수, 스터디룸 정보
-app.post("/inStudyRoom", function(req, res){
 
 });
