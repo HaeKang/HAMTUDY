@@ -123,17 +123,30 @@ app.post('/listStudyRoom', function(req, res){
 
 // 내가 만든 스터디룸 목록
 app.post('/listMyStudyRoom', function(req, res){
-    var user_idx = req.body.user_idx;
+    var user_id = req.body.user_id;
+    var sql_user_idx = 'select useridx from user where user_id = ?';
 
-    var sql = 'select room_id, user_idx, title, descr, color from room_list a, user b where a.user_idx = b.useridx and a.user_idx = ?';
-
-    connection.query(sql, [user_idx], function(error,result){
+    // idx 구함
+    connection.query(sql_user_idx, [user_id], function(error,result){
         if(error){
-            console.log(error);
-            res.send({"state" : "실패"});
-        } else{
 
-            res.send(result);
+            console.log(error);
+            res.send({"state" : "조회실패"});
+
+        } else{
+            var user_idx = result[0].useridx
+
+            // 내가 만든 스터디룸 목록
+            var sql = 'select room_id, user_idx, title, descr, color from room_list a, user b where a.user_idx = b.useridx and a.user_idx = ?';
+            connection.query(sql, [user_idx], function(err, result){
+                if(err){
+                    console.log(err);
+                    res.send({"state" : "실패"});
+                } else{
+                    res.send(result);
+                }
+            });
+
         }
     });
 
@@ -146,6 +159,7 @@ app.post('/joinStudyRoom', function(req, res){
 
     var sql_user_idx = 'select useridx from user where user_id = ?';
 
+    // user_idx 구함
     connection.query(sql_user_idx, [user_id], function(error,result){
         if(error){
 
@@ -153,6 +167,7 @@ app.post('/joinStudyRoom', function(req, res){
             res.send({"state" : "조회실패"});
 
         } else{
+            // 스터디룸 참여 실행
             var user_idx = result[0].useridx
             var sql = 'insert into join_info(room_id, user_idx) values(?,?)';
             connection.query(sql, [room_id, user_idx], function(err, result){
@@ -168,14 +183,15 @@ app.post('/joinStudyRoom', function(req, res){
     });
 
 });
-
-// 스터디룸 나가기
+ 
+// 스터디룸 나가기 ~ 실행안됨 수정필요
 app.post('/exitStudyRoom', function(req, res){
     var room_id = req.body_room_id;
     var user_id =  req.body.user_id;
 
     var sql_user_idx = 'select useridx from user where user_id = ?';
 
+    // user_idx 구함
     connection.query(sql_user_idx, [user_id], function(error,result){
         if(error){
 
@@ -183,6 +199,7 @@ app.post('/exitStudyRoom', function(req, res){
             res.send({"state" : "조회실패"});
 
         } else{
+            // join_info delete 수행 ~ 실행안됨 수정필요
             var user_idx = result[0].useridx
             var sql = 'delete from join_info where room_id = ? and user_idx = ?';
             connection.query(sql, [room_id, user_idx], function(err, result){
