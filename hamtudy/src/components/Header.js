@@ -39,7 +39,7 @@ function Header() {
                   </div>
                   <div className="dropdown-menu">
                     <li>
-                      <Link to="/">
+                      <Link to="/mypage">
                         <div>내 정보</div>
                       </Link>
                     </li>
@@ -68,7 +68,9 @@ function Header() {
                 ></Modal>
               </li>
               <li>
-                <a href="">회원가입</a>
+                <Link to="/join">
+                  <div>회원가입</div>
+                </Link>
               </li>
             </>
           )}

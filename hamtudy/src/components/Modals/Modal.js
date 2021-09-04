@@ -4,8 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import colors from "../../styles/colors";
 
-import { useDispatch, useSelector } from "react-redux";
-import { successLogin, userLogin } from "../../modules/userService";
+import { useDispatch } from "react-redux";
+import { successLogin } from "../../modules/userService";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
