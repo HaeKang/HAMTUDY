@@ -9,10 +9,13 @@ var bodyParser = require("body-parser");
 app.use(cors());
 app.use(bodyParser());
 
+
 app.listen(port, function(){
     console.log(`서버가 ${port}번 포트에서 실행중 입니다.`);
 });
 
+// socket
+app.io = require('socket.io')();
 
 app.get('/', function(req,res){
 	res.send("hello");
@@ -42,7 +45,7 @@ app.post('/idToidx', function(req, res){
         if(error){
             console.log(error);
         } else{
-            var user_idx = result[0].user_idx;
+            var user_idx = result[0].useridx;
             res.send({"user_idx" : user_idx});
         }
     });
@@ -161,7 +164,7 @@ app.post('/listMyStudyRoom', function(req, res){
 
 });
 
-// 스터디룸 삭제 
+// [수정필요] 스터디룸 삭제
 app.post('/deleteStudyRoom', function(req, res){
     var room_id = req.body.room_id;
 
@@ -171,7 +174,9 @@ app.post('/deleteStudyRoom', function(req, res){
         if(error){
 
             console.log(error);
-            res.send({"state" : "삭제실패"});
+            // 실패하는 경우엔 참여자가 한명 이상이기 때문
+            // cascade 추가하던가.. 머.. 어케 할지 고민
+            res.send({"state" : "삭제실패", "errmsg" : error});
 
         } else{
             res.send({"state" : "성공"});
@@ -217,7 +222,7 @@ app.post('/joinStudyRoom', function(req, res){
 
 });
  
-// 스터디룸 나가기 ~ 실행안됨 수정필요
+//[수정필요] 스터디룸 나가기 ~ 실행안됨
 app.post('/exitStudyRoom', function(req, res){
     var room_id = req.body_room_id;
     var user_id =  req.body.user_id;
@@ -232,7 +237,7 @@ app.post('/exitStudyRoom', function(req, res){
             res.send({"state" : "조회실패"});
 
         } else{
-            // join_info delete 수행 ~ 실행안됨 수정필요
+            // join_info delete 수행 ~ 실행안됨
             var user_idx = result[0].useridx
             var sql = 'delete from join_info where room_id = ? and user_idx = ?';
             connection.query(sql, [room_id, user_idx], function(err, result){
@@ -252,6 +257,36 @@ app.post('/exitStudyRoom', function(req, res){
 
 
 // Chatting Start-------------------------------------------------------------------------------
+// https://geundung.dev/61?category=719250
 
+app.io.on('connection', function(socket){
+    
+    // 유저 채팅 접속
+    socket.on('newUserJoin', function(nickname){
+        console.log(nickname + '님이 접속하셨습니다.');
+        // 소켓에 닉네임 저장
+        socket.nickname = nickname;
 
+        // 모든 소켓에게 알림
+        app.io.emit('update', {type:'connect', name : 'SERVER', message : nickname + '님이 접속하셨습니다.'});
+    });
+
+    // 메시지 받기
+    socket.on('message', function(data){
+        // 누가 보낸 데이터인지 저장
+        data.name = socket.nickname;
+        console.log(data);
+
+        // 보낸 사람 제외 모두에게 메시지 전송
+        socket.broadcast.emit('update', data);
+    });
+
+    // 유저 채팅 나감
+    socket.on('disconnect', function(){
+        console.log('접속종료');
+
+        socket.broadcast.emit('update', {type:'disconnect', name:'SERVER', message: socket.nickname + '님이 나가셨습니다.'});
+
+    });
+});
 // Chatting End-------------------------------------------------------------------------------
