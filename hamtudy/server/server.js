@@ -18,10 +18,11 @@ app.get('/', function(req,res){
 	res.send("hello");
 });
 
+
 // idx를 id로
 app.post('/idxToid', function(req, res){
     var idx = req.body.user_idx;
-    var sql = 'select user_id from user where user_idx = ?';
+    var sql = 'select user_id from user where useridx = ?';
     connection.query(sql, [idx], function(error,result){
         if(error){
             console.log(error);
@@ -36,7 +37,7 @@ app.post('/idxToid', function(req, res){
 // id를 idx로
 app.post('/idToidx', function(req, res){
     var id = req.body.user_id;
-    var sql = 'select user_idx from user where user_id = ?';
+    var sql = 'select useridx from user where user_id = ?';
     connection.query(sql, [id], function(error,result){
         if(error){
             console.log(error);
@@ -47,6 +48,8 @@ app.post('/idToidx', function(req, res){
     });
 
 });
+
+// Sign Up & In Start -------------------------------------------------------------------------------
 
 // 회원가입
 app.post('/SignUp', function(req,res){
@@ -83,6 +86,12 @@ app.post('/login', function(req,res){
         }
     });
 });
+
+
+// Sign Up & In  End -------------------------------------------------------------------------------
+
+
+// StudyRoom Create & list & delete Start-------------------------------------------------------------------------------
 
 // 스터디룸 생성
 app.post('/createStudyRoom', function(req, res){
@@ -152,6 +161,30 @@ app.post('/listMyStudyRoom', function(req, res){
 
 });
 
+// 스터디룸 삭제 
+app.post('/deleteStudyRoom', function(req, res){
+    var room_id = req.body.room_id;
+
+    var sql = "delete from room_list where room_id = ?";
+
+    connection.query(sql, [room_id], function(error,result){
+        if(error){
+
+            console.log(error);
+            res.send({"state" : "삭제실패"});
+
+        } else{
+            res.send({"state" : "성공"});
+        }
+    });
+
+});
+
+// StudyRoom Create & list & delete End -------------------------------------------------------------------------------
+
+
+// StudyRoom Join & Out start-------------------------------------------------------------------------------
+
 // 스터디룸 참여
 app.post('/joinStudyRoom', function(req, res){
     var room_id = req.body.room_id;
@@ -213,6 +246,12 @@ app.post('/exitStudyRoom', function(req, res){
 
         }
     });
-
-
 });
+
+// StudyRoom Join & Out End -------------------------------------------------------------------------------
+
+
+// Chatting Start-------------------------------------------------------------------------------
+
+
+// Chatting End-------------------------------------------------------------------------------
