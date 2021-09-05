@@ -2,6 +2,8 @@ import react, { useState } from "react";
 import SignUpTemplate from "./SignUpTemplate";
 import styled from "styled-components";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { signUp } from "../modules/userService";
 //TODO 회원가입
 /**
  * 아이디 중복검사
@@ -10,12 +12,12 @@ import axios from "axios";
  * 유효성검사
  */
 function SignUp() {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     user_id: "",
     user_pw: "",
     user_nick: "",
   });
-  const { user_id, user_pw, user_nick } = inputs;
   const onChange = (e) => {
     const { value, name } = e.target;
     setInputs({
@@ -24,54 +26,58 @@ function SignUp() {
     });
   };
 
-  const onClick = () => {
-    try {
-      axios
-        .post("http://3.142.49.52:8080/SignUp", {
-          user_id: user_id,
-          user_pw: user_pw,
-          user_nick: user_nick,
-        })
-        .then((res) => {
-          console.log("res", res);
-        });
-    } catch (e) {
-      alert("실패");
-    }
+  const onClick = (e) => {
+    e.preventDefault();
+    dispatch(signUp(inputs))
+      .then((res) => {
+        console.log("ㄱㄷㄴ", res);
+      })
+      .catch((e) => console.log("e", e));
   };
 
   return (
-    <>
-      <SignUpTemplate>
-        <h2>회원가입</h2>
+    <SignUpTemplate>
+      <>
         <div>
-          <Input
-            onChange={onChange}
-            name="user_id"
-            type="text"
-            placeholder="아이디"
-          />
-          <Input
-            onChange={onChange}
-            name="user_pw"
-            type="password"
-            placeholder="비밀번호"
-          />
-          <Input name="pwd" type="password" placeholder="비밀번호 확인" />
-          <Input
-            onChange={onChange}
-            name="user_nick"
-            type="text"
-            placeholder="닉네임"
-          />
+          <h2>회원가입</h2>
+          <div>
+            <Input
+              onChange={onChange}
+              name="user_id"
+              type="text"
+              placeholder="아이디"
+            />
+          </div>
+          <div>
+            <Input
+              onChange={onChange}
+              name="user_pw"
+              type="password"
+              placeholder="비밀번호"
+            />
+          </div>
+          <div>
+            <Input name="pwd" type="password" placeholder="비밀번호 확인" />
+          </div>
+          <div>
+            <Input
+              onChange={onChange}
+              name="user_nick"
+              type="text"
+              placeholder="닉네임"
+            />
+          </div>
+          <button onClick={onClick}>회원가입</button>
         </div>
-        <button onClick={onClick}>회원가입</button>
-      </SignUpTemplate>
-    </>
+      </>
+    </SignUpTemplate>
   );
 }
 
-const FromWrapper = styled.div``;
+const FromWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 const Input = styled.input`
   border-bottom: 1px solid black;
 `;

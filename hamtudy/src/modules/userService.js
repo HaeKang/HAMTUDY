@@ -1,4 +1,5 @@
-import { LOGIN_SUCCESS, AUTH_USER, LOGOUT_REQUEST } from "./type";
+import axios from "axios";
+import { LOGIN_SUCCESS, AUTH_USER, LOGOUT_REQUEST, SIGN_UP } from "./type";
 //TODO 로그인 세션 토큰 해야한다
 
 const initial_state = {
@@ -29,6 +30,13 @@ export const authUser = ({ id, nickname, token }) => ({
     token,
   },
 });
+
+export function signUp(data) {
+  const req = axios
+    .post("http://3.142.49.52:8080/SignUp", data)
+    .then((res) => res.data);
+  return { type: SIGN_UP, payload: req };
+}
 
 //FIXME  리듀서 정리좀 해...
 export default function authReducer(state = initial_state, action) {
@@ -61,6 +69,15 @@ export default function authReducer(state = initial_state, action) {
           id: action.payload.id,
           nickname: action.payload.nickname,
           token: action.type.token,
+        },
+      };
+    case SIGN_UP:
+      //서버에서 return 값 수정되면 여기도 수정!
+      return {
+        ...state,
+        auth: "SUCCESS",
+        userInfo: {
+          id: action.payload.req,
         },
       };
 

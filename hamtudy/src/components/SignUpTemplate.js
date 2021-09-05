@@ -13,10 +13,12 @@ function SignUpTemplate({ children }) {
 
 const SignUpTemplateBlock = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   .wrapper {
     width: 1200px;
+    display: flex;
+    justify-content: center;
   }
 `;
 
