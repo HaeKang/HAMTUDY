@@ -10,6 +10,7 @@ import { logoutRequest } from "../modules/userService";
 import colors from "../styles/colors";
 import profile from "../img/profile.jpeg";
 
+//TODO 로그아웃시 로그인 팝업창이 뜸
 function Header() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.authReducer.auth);
@@ -23,13 +24,7 @@ function Header() {
   //TODO logout localstorage set null
   const logout = () => {
     dispatch(logoutRequest());
-    localStorage.setItem(
-      "userInfo",
-      JSON.stringify({
-        id: null,
-        nickname: null,
-      })
-    );
+    localStorage.clear();
   };
 
   return (

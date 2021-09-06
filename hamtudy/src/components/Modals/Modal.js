@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-// import "./modal.css";
-import axios from "axios";
 import styled from "styled-components";
 import colors from "../../styles/colors";
 
 import { useDispatch } from "react-redux";
-import { successLogin } from "../../modules/userService";
+import { loginRequest } from "../../modules/userService";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
@@ -23,31 +21,24 @@ const Modal = (props) => {
       [name]: value,
     });
   };
-
   const onClick = () => {
-    try {
-      axios
-        .post("http://3.142.49.52:8080/login", {
-          user_id: id,
-          user_pw: pwd,
-        })
-        .then((res) => {
-          dispatch(successLogin(res.data.user_id, res.data.user_nick));
-          localStorage.setItem(
-            "userInfo",
-            JSON.stringify({
-              id: res.data.user_id,
-              nickname: res.data.user_nick,
-            })
-          );
-          close();
-        })
-        .catch((err) => {
-          alert("아이디 또는 비밀번호가 틀렸습니다.");
-        });
-    } catch (e) {
-      alert("로그인 실패!");
-    }
+    dispatch(
+      loginRequest({
+        user_id: id,
+        user_pw: pwd,
+      })
+    )
+      .then(() => {
+        close();
+        //TODO localstorage 수정
+        // localStorage.setItem(
+        //   "userInfo",
+        //   JSON.stringify({
+        //     id: user_id,
+        //     nickname: user_nick,
+        //   })
+      })
+      .catch((err) => window.alert(err, "로그인 실패!"));
   };
 
   return (

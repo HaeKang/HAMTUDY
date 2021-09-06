@@ -11,10 +11,10 @@ import SignUp from "./components/SignUp";
 
 function App() {
   const dispatch = useDispatch();
-  if (localStorage.getItem("userInfo")) {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    dispatch(authUser(userInfo));
-  }
+  // if (localStorage.getItem("userInfo")) {
+  //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  //   dispatch(authUser(userInfo));
+  // }
   return (
     <>
       <GlobalStyle />
