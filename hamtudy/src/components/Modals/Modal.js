@@ -28,16 +28,18 @@ const Modal = (props) => {
         user_pw: pwd,
       })
     )
-      .then(() => {
+      .then((res) => {
         close();
         //TODO localstorage 수정
-        // localStorage.setItem(
-        //   "userInfo",
-        //   JSON.stringify({
-        //     id: user_id,
-        //     nickname: user_nick,
-        //   })
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            id: res.user_id,
+            nickname: res.user_nick,
+          })
+        );
       })
+
       .catch((err) => window.alert(err, "로그인 실패!"));
   };
 
