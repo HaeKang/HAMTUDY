@@ -70,11 +70,6 @@ function Header() {
                   header="modal heading"
                 ></Modal>
               </li>
-              <li>
-                <Link to="/sign_up">
-                  <div>회원가입</div>
-                </Link>
-              </li>
             </>
           )}
         </NavWrapper>

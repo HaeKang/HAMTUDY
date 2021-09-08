@@ -1,7 +1,6 @@
 import react, { useRef, useState } from "react";
 import SignUpTemplate from "./SignUpTemplate";
 import styled from "styled-components";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signUp } from "../modules/userService";
 import colors from "../styles/colors";
