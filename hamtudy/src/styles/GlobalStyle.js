@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 }
 body{
   list-style: none;
+  background-color: ${colors.background};
 }
 button{
   background-color: transparent;

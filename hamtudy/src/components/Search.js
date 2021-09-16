@@ -34,7 +34,10 @@ const SearchWrapper = styled.div`
   align-items: center;
   flex-direction: column; */
   .search {
-    background-color: ${colors.gray};
+    background-color: ${colors.white};
+    box-shadow: 0px 7px 23px 1px rgba(216, 216, 255, 0.3);
+    border-radius: 10px;
+    padding: 0 12px;
   }
 `;
 const SearchButton = styled.button`
@@ -45,7 +48,7 @@ const SearchInput = styled.input`
   border: none;
   font-size: 14px;
   width: 400px;
-  padding: 10px 20px;
+  padding: 10px 0;
   background-color: transparent;
 `;
 export default Search;

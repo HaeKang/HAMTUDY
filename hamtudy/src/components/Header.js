@@ -83,9 +83,10 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  padding: 0 150px;
-  border-bottom: 1px solid ${colors.black};
-`;
+  padding: 20px 150px;
+  margin-bottom: 20px;
+  background-color: transparent;
+}`;
 const NavWrapper = styled.nav`
   display: flex;
   align-items: center;

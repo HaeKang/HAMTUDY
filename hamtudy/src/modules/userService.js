@@ -7,7 +7,7 @@ import {
   SIGN_UP,
   LOGIN_SUCCESS,
 } from "./type";
-//TODO 로그인 세션 토큰 해야한다
+//TODO 로그인 세션 토큰
 
 const initial_state = {
   userInfo: {
@@ -48,11 +48,9 @@ export function signUp(data) {
   return { type: SIGN_UP, payload: req };
 }
 
-//FIXME  리듀서 정리좀 해...
 export default function authReducer(state = initial_state, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
-      console.log("action req", action);
       return {
         ...state,
         auth: "SUCCESS",
@@ -84,22 +82,9 @@ export default function authReducer(state = initial_state, action) {
         },
       };
     case SIGN_UP:
-      console.log("signup", action.payload);
       return state;
 
     default:
       return state;
   }
 }
-
-// export default function loginUser(state = initial_state, action) {
-//   switch (action.type) {
-//     case SET_USER:
-//       return {
-//         id: action.id,
-//         nickname: action.nickname,
-//       };
-//     default:
-//       return state;
-//   }
-// }
