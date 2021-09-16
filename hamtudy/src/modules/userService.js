@@ -42,7 +42,9 @@ export const authUser = ({ id, nickname, token }) => ({
 });
 
 export function signUp(data) {
-  const req = axios.post(baseURL + "/SignUp", data).then((res) => res.data);
+  const req = axios.post(baseURL + "/SignUp", data).then((res) => {
+    return res.data;
+  });
   return { type: SIGN_UP, payload: req };
 }
 
@@ -83,13 +85,7 @@ export default function authReducer(state = initial_state, action) {
       };
     case SIGN_UP:
       console.log("signup", action.payload);
-      return {
-        ...state,
-        auth: "SUCCESS",
-        userInfo: {
-          id: action.payload.req,
-        },
-      };
+      return state;
 
     default:
       return state;

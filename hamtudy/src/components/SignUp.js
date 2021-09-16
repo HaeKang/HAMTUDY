@@ -11,7 +11,11 @@ import colors from "../styles/colors";
  * 프로필이미지
  * 유효성검사
  */
-function SignUp() {
+function SignUp({ history }) {
+  const goHome = () => {
+    history.push("/");
+  };
+
   const dispatch = useDispatch();
 
   const [user_id, setUserId] = useState(null);
@@ -41,7 +45,8 @@ function SignUp() {
         signUp({ user_id: user_id, user_pw: user_pw, user_nick: user_nick })
       )
         .then((res) => {
-          console.log("ㄱㄷㄴ", res);
+          alert("회원가입이 완료되었습니다.");
+          goHome();
         })
         .catch((e) => console.log("e", e));
     }
