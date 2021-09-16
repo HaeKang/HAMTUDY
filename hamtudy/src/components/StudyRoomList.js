@@ -16,7 +16,7 @@ function StudyRoomList({ data }) {
               color={studyroom.color}
             />
           </Link>
-          <div>메롱메롱 메롱</div>
+          <div></div>
         </CardWrapper>
       ))}
     </CardsWrapper>

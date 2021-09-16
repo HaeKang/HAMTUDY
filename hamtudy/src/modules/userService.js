@@ -55,8 +55,8 @@ export default function authReducer(state = initial_state, action) {
         ...state,
         auth: "SUCCESS",
         userInfo: {
-          id: action.payload.id,
-          nickname: action.payload.nickname,
+          id: action.payload.user_id,
+          nickname: action.payload.user_nick,
           token: action.payload.token,
         },
       };
