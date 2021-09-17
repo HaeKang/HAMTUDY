@@ -31,7 +31,6 @@ const Modal = (props) => {
     )
       .then((res) => {
         close();
-        //TODO localstorage 수정
         localStorage.setItem(
           "userInfo",
           JSON.stringify({
@@ -40,7 +39,6 @@ const Modal = (props) => {
           })
         );
       })
-
       .catch((err) => window.alert(err, "로그인 실패!"));
   };
 
@@ -84,7 +82,7 @@ const Modal = (props) => {
                     <button onClick={onClick}>로그인</button>
                   </div>
                   <Link className="sign_up" to="/sign_up">
-                    <div>회원가입</div>
+                    <div onClick={close}>회원가입</div>
                   </Link>
                 </div>
               </div>
