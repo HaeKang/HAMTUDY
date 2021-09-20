@@ -16,13 +16,14 @@ function Search() {
     <>
       <SearchWrapper>
         <div className="search">
+          <SearchButton type="submit">🔍</SearchButton>
+
           <SearchInput
             type="text"
             name="query"
             placeholder="오늘은 어떤 공부를 하면 좋을까?"
             onChange={onChange}
           />
-          <SearchButton type="submit">🔍</SearchButton>
         </div>
         {/* <CategoryList categories={categories}></CategoryList> */}
       </SearchWrapper>

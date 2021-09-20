@@ -10,7 +10,6 @@ import { logoutRequest } from "../modules/userService";
 import colors from "../styles/colors";
 import profile from "../img/profile.jpeg";
 
-//TODO 로그아웃시 로그인 팝업창이 뜸
 function Header() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.authReducer.auth);
@@ -21,7 +20,6 @@ function Header() {
   const closeModal = () => {
     setModalOpen(!modalOpen);
   };
-  //TODO logout localstorage set null
   const logout = () => {
     dispatch(logoutRequest());
     localStorage.clear();
@@ -86,7 +84,8 @@ const HeaderWrapper = styled.header`
   padding: 20px 150px;
   margin-bottom: 20px;
   background-color: transparent;
-}`;
+`;
+
 const NavWrapper = styled.nav`
   display: flex;
   align-items: center;
@@ -96,12 +95,17 @@ const NavWrapper = styled.nav`
     cursor: pointer;
   }
   .my-info {
-    border-radius: 4px;
-    width: 30px;
-    height: 30px;
+    border-radius: 8px;
+    border: 6px solid ${colors.white};
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+
     cursor: pointer;
     overflow: hidden;
     .profile-img {
+      border-radius: 100%;
+
       width: 100%;
       height: 100%;
       object-fit: cover;
