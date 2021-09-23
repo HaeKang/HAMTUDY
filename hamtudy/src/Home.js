@@ -41,7 +41,9 @@ function Home() {
   return (
     <>
       <HomeTemplate>
-        <StudyRoomList data={SAMPLE_STUDY_ROOMS} />
+        <div>
+          <StudyRoomList data={SAMPLE_STUDY_ROOMS} />
+        </div>
       </HomeTemplate>
     </>
   );
