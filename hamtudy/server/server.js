@@ -61,7 +61,7 @@ app.post('/SignUp', function(req,res){
     var nickname = req.body.user_nick;
     var total_studytime = 0
 
-	var sql = 'insert into user(id, pw, nickname, total_studytime) values(?,?,?)';
+	var sql = 'insert into user(id, pw, nickname, total_studytime) values(?,?,?,?)';
     connection.query(sql, [id,pw,nickname, total_studytime], function(error,result){
         if(error){
             console.log(error);
