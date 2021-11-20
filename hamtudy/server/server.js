@@ -59,9 +59,10 @@ app.post('/SignUp', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
     var nickname = req.body.user_nick;
+    var total_studytime = 0
 
-	var sql = 'insert into user(user_id, user_pw, user_nick) values(?,?,?)';
-    connection.query(sql, [id,pw,nickname], function(error,result){
+	var sql = 'insert into user(id, pw, nickname, total_studytime) values(?,?,?)';
+    connection.query(sql, [id,pw,nickname, total_studytime], function(error,result){
         if(error){
             console.log(error);
             res.send({"state" : "실패"});
@@ -76,16 +77,16 @@ app.post('/login', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
 
-	var sql = 'select useridx, user_nick from user where user_id = ? and user_pw = ?';
+	var sql = 'select idx, nickname from user where id = ? and pw = ?';
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
             res.send({"state" : "실패"});
         } else{
-            var user_idx = result[0].user_idx;
-            var user_nick = result[0].user_nick;
+            var user_idx = result[0].idx;
+            var user_nick = result[0].nickname;
             var user_id = id;
-            res.send({"user_id" : user_id,  "user_idx" : user_idx, "user_nick" : user_nick});
+            res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
         }
     });
 });
