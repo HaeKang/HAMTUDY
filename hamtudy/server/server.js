@@ -52,7 +52,7 @@ app.post('/idToidx', function(req, res){
 
 });
 
-// Sign Up & In Start -------------------------------------------------------------------------------
+// 회원 정보 관리 Start -------------------------------------------------------------------------------
 
 // 회원가입
 app.post('/SignUp', function(req,res){
@@ -92,7 +92,45 @@ app.post('/login', function(req,res){
 });
 
 
-// Sign Up & In  End -------------------------------------------------------------------------------
+// 회원 정보 수정
+app.post('/modify', function(req,res){
+    var id = req.body.user_id;
+    var pw = req.body.user_pw;
+
+	var sql = 'select idx, nickname from user where id = ? and pw = ?';
+    connection.query(sql, [id,pw], function(error,result){
+        if(error){
+            console.log(error);
+            res.send({"state" : "실패"});
+        } else{
+            var user_idx = result[0].idx;
+            var user_nick = result[0].nickname;
+            var user_id = id;
+            res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
+        }
+    });
+});
+
+// 내정보
+app.post('/myinfo', function(req,res){
+    var id = req.body.user_id;
+    var pw = req.body.user_pw;
+
+	var sql = 'select idx, nickname from user where id = ? and pw = ?';
+    connection.query(sql, [id,pw], function(error,result){
+        if(error){
+            console.log(error);
+            res.send({"state" : "실패"});
+        } else{
+            var user_idx = result[0].idx;
+            var user_nick = result[0].nickname;
+            var user_id = id;
+            res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
+        }
+    });
+});
+
+// 회원 정보 관리  End -------------------------------------------------------------------------------
 
 
 // StudyRoom Create & list & delete Start-------------------------------------------------------------------------------
