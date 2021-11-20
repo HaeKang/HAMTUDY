@@ -137,6 +137,7 @@ app.post('/myinfo', function(req,res){
 
 // 스터디룸 생성
 app.post('/createStudyRoom', function(req, res){
+    // 아이디로 바꾸끼
     var user_idx = req.body.user_idx;
     var title = req.body.title;
     var desc = req.body.desc;
@@ -163,7 +164,7 @@ app.post('/listStudyRoom', function(req, res){
     connection.query(sql,  function(error,result){
         if(error){
             console.log(error);
-            res.send({"state" : "실패"});
+            res.send({"status" : "어쩔티비"});
         } else{
             res.send(result);
         }
@@ -241,7 +242,7 @@ app.post('/joinStudyRoom', function(req, res){
         if(error){
 
             console.log(error);
-            res.send({"state" : "조회실패"});
+            res.send({"status" : "조회실패"});
 
         } else{
             // 스터디룸 참여 실행
@@ -250,9 +251,9 @@ app.post('/joinStudyRoom', function(req, res){
             connection.query(sql, [room_id, user_idx], function(err, result){
                 if(err){
                     console.log(err);
-                    res.send({"state" : "삽입실패"});
+                    res.send({"status" : "어쩔티비"});
                 } else{
-                    res.send({"state" : "성공"});
+                    res.send({"status" : "성공"});
                 }
             });
 
