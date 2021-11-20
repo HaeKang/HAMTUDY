@@ -12,7 +12,7 @@ function Logo() {
 const LogoWrapper = styled.div`
   color: ${colors.black};
   font-weight: 800;
-  font-size: 30px;
+  font-size: 24px;
   cursor: pointer;
 `;
 export default Logo;

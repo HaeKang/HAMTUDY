@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-// import "./modal.css";
-import axios from "axios";
 import styled from "styled-components";
 import colors from "../../styles/colors";
-
-import { useDispatch, useSelector } from "react-redux";
-import { successLogin, userLogin } from "../../modules/userService";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginRequest } from "../../modules/userService";
+import profile from "../../img/profile.jpeg";
 
 const Modal = (props) => {
   const dispatch = useDispatch();
@@ -23,31 +22,24 @@ const Modal = (props) => {
       [name]: value,
     });
   };
-
   const onClick = () => {
-    try {
-      axios
-        .post("http://3.142.49.52:8080/login", {
-          user_id: id,
-          user_pw: pwd,
-        })
-        .then((res) => {
-          dispatch(successLogin(res.data.user_id, res.data.user_nick));
-          localStorage.setItem(
-            "userInfo",
-            JSON.stringify({
-              id: res.data.user_id,
-              nickname: res.data.user_nick,
-            })
-          );
-          close();
-        })
-        .catch((err) => {
-          alert("아이디 또는 비밀번호가 틀렸습니다.");
-        });
-    } catch (e) {
-      alert("로그인 실패!");
-    }
+    dispatch(
+      loginRequest({
+        user_id: id,
+        user_pw: pwd,
+      })
+    )
+      .then((res) => {
+        close();
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            id: res.user_id,
+            nickname: res.user_nick,
+          })
+        );
+      })
+      .catch((err) => window.alert(err, "로그인 실패!"));
   };
 
   return (
@@ -62,28 +54,38 @@ const Modal = (props) => {
                   &times;{" "}
                 </div>
               </header>
-              <main>
-                <h2>로그인을 해주세요</h2>
-                <div>
-                  <input
-                    name="id"
-                    value={id}
-                    onChange={onChange}
-                    type="text"
-                    placeholder="아이디를 입력하세요."
-                  ></input>
+              <div className="main_wrapper">
+                <div className="login_img"></div>
+                <div className="main">
+                  <div className="title">
+                    <h3>로그인</h3>
+                  </div>
+                  <div>
+                    <input
+                      name="id"
+                      value={id}
+                      onChange={onChange}
+                      type="text"
+                      placeholder="아이디를 입력하세요."
+                    ></input>
+                  </div>
+                  <div>
+                    <input
+                      name="pwd"
+                      value={pwd}
+                      onChange={onChange}
+                      type="password"
+                      placeholder="비밀번호를 입력하세요."
+                    ></input>
+                  </div>
+                  <div>
+                    <button onClick={onClick}>로그인</button>
+                  </div>
+                  <Link className="sign_up" to="/sign_up">
+                    <div onClick={close}>회원가입</div>
+                  </Link>
                 </div>
-                <div>
-                  <input
-                    name="pwd"
-                    value={pwd}
-                    onChange={onChange}
-                    type="password"
-                    placeholder="비밀번호를 입력하세요."
-                  ></input>
-                </div>
-                <button onClick={onClick}>로그인</button>
-              </main>
+              </div>
             </section>
           </div>
         </ModalBlcok>
@@ -103,17 +105,72 @@ const ModalBlcok = styled.div`
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6);
+  cursor: default;
   .modal-wrapper {
-    width: 400px;
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 8px;
     background-color: ${colors.white};
-  }
-  header {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .close {
-    cursor: pointer;
-    font-size: 20px;
+    header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding: 8px 16px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .close {
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .main_wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .login_img {
+        width: 200px;
+        height: 300px;
+        background-color: skyblue;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        padding: 0px 24px;
+        div {
+          margin-bottom: 14px;
+        }
+        .title {
+          display: flex;
+          align-self: flex-start;
+        }
+        .sign_up {
+          align-self: flex-end;
+          color: ${colors.theme};
+        }
+        input {
+          background-color: ${colors.gray};
+          min-width: 300px;
+          min-height: 40px;
+          border-radius: 4px;
+          padding: 8px 12px;
+        }
+        button {
+          min-width: 300px;
+          min-height: 40px;
+          background-color: ${colors.point};
+          border-radius: 4px;
+        }
+      }
+    }
   }
 `;
 

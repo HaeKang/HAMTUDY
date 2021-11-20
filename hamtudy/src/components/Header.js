@@ -22,6 +22,7 @@ function Header() {
   };
   const logout = () => {
     dispatch(logoutRequest());
+    localStorage.clear();
   };
 
   return (
@@ -39,7 +40,7 @@ function Header() {
                   </div>
                   <div className="dropdown-menu">
                     <li>
-                      <Link to="/">
+                      <Link to="/mypage">
                         <div>내 정보</div>
                       </Link>
                     </li>
@@ -67,9 +68,6 @@ function Header() {
                   header="modal heading"
                 ></Modal>
               </li>
-              <li>
-                <a href="">회원가입</a>
-              </li>
             </>
           )}
         </NavWrapper>
@@ -83,9 +81,11 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  padding: 0 150px;
-  border-bottom: 1px solid ${colors.black};
+  padding: 20px 150px;
+  margin-bottom: 20px;
+  background-color: transparent;
 `;
+
 const NavWrapper = styled.nav`
   display: flex;
   align-items: center;
@@ -95,12 +95,17 @@ const NavWrapper = styled.nav`
     cursor: pointer;
   }
   .my-info {
-    border-radius: 4px;
-    width: 30px;
-    height: 30px;
+    border-radius: 8px;
+    border: 6px solid ${colors.white};
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+
     cursor: pointer;
     overflow: hidden;
     .profile-img {
+      border-radius: 100%;
+
       width: 100%;
       height: 100%;
       object-fit: cover;

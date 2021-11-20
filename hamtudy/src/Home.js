@@ -41,8 +41,9 @@ function Home() {
   return (
     <>
       <HomeTemplate>
-        <h3>열공 중인 스터디룸🔥</h3>
-        <StudyRoomList data={SAMPLE_STUDY_ROOMS} />
+        <div>
+          <StudyRoomList data={SAMPLE_STUDY_ROOMS} />
+        </div>
       </HomeTemplate>
     </>
   );

@@ -6,13 +6,15 @@ import StudyRoom from "./StudyRoom";
 import GlobalStyle from "./styles/GlobalStyle";
 import { authUser } from "./modules/userService";
 import CreateStudyRoom from "./components/CreateStudyRoom";
+import Mypage from "./components/Mypage";
+import SignUp from "./components/SignUp";
 
 function App() {
   const dispatch = useDispatch();
-  if (localStorage.getItem("userInfo")) {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    dispatch(authUser(userInfo));
-  }
+  // if (localStorage.getItem("userInfo")) {
+  //   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  //   dispatch(authUser(userInfo));
+  // }
   return (
     <>
       <GlobalStyle />
@@ -20,6 +22,8 @@ function App() {
       <Route path="/" exact={true} component={Home} />
       <Route path="/room/:room" component={StudyRoom} />
       <Route path="/create_study_room" component={CreateStudyRoom} />
+      <Route path="/mypage" component={Mypage} />
+      <Route path="/sign_up" component={SignUp} />
     </>
   );
 }

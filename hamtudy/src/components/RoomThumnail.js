@@ -14,18 +14,14 @@ function RoomThumnail({ title, describe, color }) {
 }
 
 const ThumnailWrapper = styled.div`
-  /* border: 1px solid black; */
-  /* border-top-left-radius:4px; */
-  /* border-top-right-radius: 4px; */
   border-radius: 8px;
-  width: 350px;
+  width: 95%;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.color || colors.white}};
-  
-  .info {
+  background-color: ${(props) => props.color || colors.white}}
+   .info {
     display: flex;
     flex-direction: column;
     align-items: center;
