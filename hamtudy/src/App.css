@@ -1,3 +1,9 @@
+@font-face{
+  font-family: "Pretendard";
+  src: url(../src/assets/font/Pretendard-Regular.otf);
+}
+
+
 .App {
   text-align: center;
 }
