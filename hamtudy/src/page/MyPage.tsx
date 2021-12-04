@@ -1,15 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import profile from "../img/profile.jpeg";
-import HomeTemplate from "./HomeTemplate";
+import Template from "../components/Template";
+import profile from "../assets/img/profile.jpeg";
 
 function Mypage() {
-  const user_nick = useSelector((state) => state.authReducer.userInfo.nickname);
+    const user_nick="a";
+//   const user_nick = useSelector((state) => state.userInfo.nickname);
 
   console.log(user_nick);
   return (
-    <Wrapper>
+    <Template>
       <div className="dd">
         <h2>내정보</h2>
         <ProfileBlock>
@@ -23,7 +24,7 @@ function Mypage() {
 
         <button>수정하기</button>
       </div>
-    </Wrapper>
+    </Template>
   );
 }
 

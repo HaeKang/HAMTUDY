@@ -2,10 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Window from "./Window";
 
-function WindowShare({ share }) {
+type WindowShareProps = {
+  onShare:boolean
+}
+
+function WindowShare({onShare} :WindowShareProps) {
   return (
     <WindowShareBlock>
-      <Window share={share} />
+      <Window onShare={onShare} />
     </WindowShareBlock>
   );
 }

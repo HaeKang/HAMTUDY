@@ -17,8 +17,10 @@ const palette = {
       shadow:palette.light_purple,
       primary:palette.blue,
       point_color:palette.light_tengerine,
+      second_color:palette.light_purple,
       gray:palette.light_purple,
       black:palette.dark_gray,
+      white:palette.white
     },
     fontColor:{
       black:palette.dark_gray,

@@ -1,29 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import colors from "../styles/colors";
-import RoomThumnail from "./RoomThumnail";
+import {theme} from "../assets/theme/theme";
+import time_svg from "../assets/icon/time.svg";
+import participants_svg from "../assets/icon/participants.svg";
+import RoomThumbnail from "./RoomThumbnail"
 
-import time_svg from "../assets/time.svg";
-import participants_svg from "../assets/participants.svg";
-
-{
-  /* <h3>열공 중인 스터디룸🔥</h3> */
+interface StudyRoom {
+    title:string,
+    describe:string,
+    color?:string|undefined,
+    participants:number
 }
-function StudyRoomList({ data }) {
+
+type StudyRoomListProps = {
+    studyrooms :StudyRoom[]
+}
+
+
+function StudyRoomList({ studyrooms }:StudyRoomListProps) {
   return (
     <Wrapper>
       <h2 className="title">열공 중인 스터디룸🔥</h2>
       <CardsWrapper>
-        {data.map((studyroom) => (
+        {studyrooms.map((studyroom) => (
           <CardWrapper>
-            <Link to={"/room/" + studyroom.title}>
-              <RoomThumnail
+            {/* <Link to={"/room/" + studyroom.title}> */}
+              <RoomThumbnail
                 title={studyroom.title}
                 describe={studyroom.describe}
                 color={studyroom.color}
               />
-            </Link>
+            {/* </Link> */}
 
             <div className="studyroom_info">
               <div className="study_participants_wrapper">
@@ -63,7 +71,7 @@ const CardsWrapper = styled.div`
 
 const CardWrapper = styled.div`
   border-radius: 8px;
-  background-color: ${colors.white};
+  background-color: ${theme.colors.white};
   width: 350px;
   height: fit-content;
   padding: 14px 12px;
@@ -90,7 +98,7 @@ const CardWrapper = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: ${colors.orange};
+        background-color: ${theme.colors.point_color};
       }
     }
     .study_time_wrapper {
@@ -103,7 +111,7 @@ const CardWrapper = styled.div`
         justify-content: center;
         width: 30px;
         height: 30px;
-        background-color: ${colors.point};
+        background-color: ${theme.colors.second_color};
       }
     }
   }

@@ -2,17 +2,18 @@ import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Modal from "./modals/Modal";
 import styled from "styled-components";
-import Logo from "./Logo";
-import Search from "./Search";
 import { logoutRequest } from "../modules/userService";
-import colors from "../styles/colors";
-import profile from "../img/profile.jpeg";
+import profile from "../assets/img/profile.jpeg";
+import {theme} from "../assets/theme/theme";
+import Logo from "./Logo";
+import {RootState} from "../modules";
+import Search from "./Search";
+import Modal from "./modals/Modal";
 
 function Header() {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.authReducer.auth);
+  const auth = useSelector((state:RootState) => state.userService.auth);
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
@@ -28,7 +29,7 @@ function Header() {
   return (
     <>
       <HeaderWrapper>
-        <Logo />
+        <Logo/>
         <NavWrapper>
           <Search />
           {auth == "SUCCESS" && (
@@ -96,7 +97,7 @@ const NavWrapper = styled.nav`
   }
   .my-info {
     border-radius: 8px;
-    border: 6px solid ${colors.white};
+    border: 6px solid ${theme.colors.background};
     width: 40px;
     height: 40px;
     border-radius: 100%;
@@ -120,7 +121,7 @@ const NavWrapper = styled.nav`
     height: 50px;
     position: absolute;
     display: none;
-    background-color: ${colors.gray};
+    background-color: ${theme.colors.gray};
   }
   .dropdown-menu > li:hover {
     text-decoration: underline;

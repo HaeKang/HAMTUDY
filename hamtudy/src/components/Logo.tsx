@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import colors from "../styles/colors";
+import {theme} from "../assets/theme/theme";
 function Logo() {
   return (
     <Link to="/">
@@ -10,7 +10,7 @@ function Logo() {
   );
 }
 const LogoWrapper = styled.div`
-  color: ${colors.black};
+  color: ${theme.fontColor.black};
   font-weight: 800;
   font-size: 24px;
   cursor: pointer;

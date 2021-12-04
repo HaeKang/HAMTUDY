@@ -11,20 +11,24 @@ const mediaStreamConstraints = {
     },
   },
 };
-function Window({ share }) {
-  const localVideo = React.createRef();
+
+type WindowProps = {
+    onShare:boolean
+}
+function Window( {onShare}:WindowProps) {
+  const localVideo = React.createRef<HTMLVideoElement>();
   let localStream;
 
-  function gotLocalMediaStream(mediaStream) {
+  function gotLocalMediaStream(mediaStream:MediaProvider | null | undefined) {
     localStream = mediaStream;
     console.log("gotLocalMediaStream localVideo", localVideo.current);
-    localVideo.current.srcObject = mediaStream;
+    // localVideo?  (localVideo.current.srcObject = mediaStream) : null;
   }
 
-  function handleLocalMediaStreamError(error) {
+  function handleLocalMediaStreamError(error:any) {
     console.log("navigator.getUserMedia error: ", error);
   }
-  if (share) {
+  if (onShare) {
     navigator.mediaDevices
       .getUserMedia(mediaStreamConstraints) //-> get permission "can i access^^?"
       .then(gotLocalMediaStream) //-> mediastream이 리턴됨. 그리고 gotlocalmediastream을 호출

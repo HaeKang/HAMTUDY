@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import colors from "../styles/colors";
-import CategoryList from "./CategoryList";
+import {theme} from "../assets/theme/theme";
 
 //FIXME categories delete
 const categories = ["햄스토", "토익", "알고리즘", "윤영미교수님", "나물이"];
 
 function Search() {
   const [value, setValue] = useState("");
-  const onChange = (e) => {
+  const onChange = (e:any) => {
     setValue(e.target.value);
   };
 
@@ -35,7 +34,7 @@ const SearchWrapper = styled.div`
   align-items: center;
   flex-direction: column; */
   .search {
-    background-color: ${colors.white};
+    background-color: ${theme.colors.background};
     box-shadow: 0px 7px 23px 1px rgba(216, 216, 255, 0.3);
     border-radius: 10px;
     padding: 0 12px;

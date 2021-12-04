@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import colors from "../styles/colors";
+import {theme} from "../assets/theme/theme";
 
-function Chat({ nickname, profile, text, time }) {
+type ChatProps = {
+    nickname:string,
+    profile?:string,
+    text:string,
+    time:string
+}
+
+function Chat({ nickname, profile, text, time }:ChatProps) {
   return (
     <ChatBlock>
       <div className="profile"></div>
@@ -28,7 +35,7 @@ const ChatBlock = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50px;
-    background-color: ${colors.black};
+    background-color: ${theme.colors.black};
     margin-right: 12px;
   }
   .nickname {
