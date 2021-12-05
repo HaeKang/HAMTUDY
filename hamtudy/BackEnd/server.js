@@ -148,9 +148,9 @@ app.post('/createStudyRoom', function(req, res){
     connection.query(sql, [user_idx,title,desc,color], function(error,result){
         if(error){
             console.log(error);
-            res.send({"state" : "실패"});
+            res.send({"status" : "어쩔티비"});
         } else{
-            res.send({"state" : "성공"});
+            res.send({"status" : "성공"});
         }
     });
 
