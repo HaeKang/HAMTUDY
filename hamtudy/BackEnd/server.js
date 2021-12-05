@@ -94,14 +94,14 @@ app.post('/idToidx', function(req, res){
 //     });
 // });
 
-app.post('/SignUp', upload.single("image"), function(req,res){
+app.post('/SignUp', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
     var nickname = req.body.user_nick;
     var total_studytime = 0
     //var image = `/img/${req.file.filename}`;
     var image = '';
-    
+
     const datas = [id,pw,nickname,total_studytime,image];
 
 	var sql = 'insert into user(id, pw, nickname, total_studytime, img) values(?,?,?,?, ?)';
