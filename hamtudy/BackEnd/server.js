@@ -233,29 +233,15 @@ app.post('/ListStudyRoom', function(req, res){
 // 내가 만든 스터디룸 목록
 app.post('/ListMyStudyRoom', function(req, res){
     var user_id = req.body.user_id;
-    var sql_user_idx = 'select useridx from user where user_id = ?';
 
-    // idx 구함
-    connection.query(sql_user_idx, [user_id], function(error,result){
-        if(error){
-
-            console.log(error);
-            res.send({"state" : "조회실패"});
-
+    // 내가 만든 스터디룸 목록
+    var sql = 'select * from room_list where user_id = ?';
+    connection.query(sql, [user_id], function(err, result){
+        if(err){
+            console.log(err);
+            res.send({"state" : "실패"});
         } else{
-            var user_idx = result[0].useridx
-
-            // 내가 만든 스터디룸 목록
-            var sql = 'select room_id, user_idx, title, descr, color from room_list a, user b where a.user_idx = b.useridx and a.user_idx = ?';
-            connection.query(sql, [user_idx], function(err, result){
-                if(err){
-                    console.log(err);
-                    res.send({"state" : "실패"});
-                } else{
-                    res.send(result);
-                }
-            });
-
+            res.send(result);
         }
     });
 
