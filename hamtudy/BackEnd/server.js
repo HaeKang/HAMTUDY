@@ -96,7 +96,7 @@ app.post('/SignUp', upload.single("image"), function(req,res){
 
 
 // 로그인
-app.post('/login', function(req,res){
+app.post('/Login', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
 
@@ -116,7 +116,7 @@ app.post('/login', function(req,res){
 
 
 // 회원 정보 수정
-app.post('/modify', function(req,res){
+app.post('/Modify', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
 
@@ -135,7 +135,7 @@ app.post('/modify', function(req,res){
 });
 
 // 내정보
-app.post('/myinfo', function(req,res){
+app.post('/MyInfo', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
 
@@ -159,7 +159,7 @@ app.post('/myinfo', function(req,res){
 // StudyRoom Create & list & delete Start-------------------------------------------------------------------------------
 
 // 스터디룸 생성
-app.post('/createStudyRoom', function(req, res){
+app.post('/CreateStudyRoom', function(req, res){
     // 아이디로 바꾸끼
     var user_idx = req.body.user_idx;
     var title = req.body.title;
@@ -180,7 +180,7 @@ app.post('/createStudyRoom', function(req, res){
 });
 
 // 전체 스터디룸 목록
-app.post('/listStudyRoom', function(req, res){
+app.post('/ListStudyRoom', function(req, res){
     // room_id, user_idx, title, descr
     var sql = 'select * from room_list';
 
@@ -197,7 +197,7 @@ app.post('/listStudyRoom', function(req, res){
 
 
 // 내가 만든 스터디룸 목록
-app.post('/listMyStudyRoom', function(req, res){
+app.post('/ListMyStudyRoom', function(req, res){
     var user_id = req.body.user_id;
     var sql_user_idx = 'select useridx from user where user_id = ?';
 
@@ -228,7 +228,7 @@ app.post('/listMyStudyRoom', function(req, res){
 });
 
 // [수정필요] 스터디룸 삭제
-app.post('/deleteStudyRoom', function(req, res){
+app.post('/DeleteStudyRoom', function(req, res){
     var room_id = req.body.room_id;
 
     var sql = "delete from room_list where room_id = ?";
@@ -254,7 +254,7 @@ app.post('/deleteStudyRoom', function(req, res){
 // StudyRoom Join & Out start-------------------------------------------------------------------------------
 
 // 스터디룸 참여
-app.post('/joinStudyRoom', function(req, res){
+app.post('/JoinStudyRoom', function(req, res){
     var room_id = req.body.room_id;
     var user_id = req.body.user_id;
 
@@ -286,7 +286,7 @@ app.post('/joinStudyRoom', function(req, res){
 });
  
 //[수정필요] 스터디룸 나가기 ~ 실행안됨
-app.post('/exitStudyRoom', function(req, res){
+app.post('/ExitStudyRoom', function(req, res){
     var room_id = req.body_room_id;
     var user_id =  req.body.user_id;
 
