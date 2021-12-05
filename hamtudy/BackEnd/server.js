@@ -3,8 +3,8 @@ const app = express();
 const cors = require('cors');
 const port = 8080;
 
-const multer = require("multer");
-const path = require("path");
+//const multer = require("multer");
+//const path = require("path");
 
 var connection = require("./routes/mysql_con");
 var bodyParser = require("body-parser");
@@ -57,29 +57,51 @@ app.post('/idToidx', function(req, res){
 
 // 이미지
 // 이미지 파트
-var storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, "/img/");
-    },
-    filename : function(req, file, cb){
-        const ext = path.extname(file.originalname);
-        cb(null, path.basename(file.originalname, ext) + "-" + Date.now() + ext);
-    },
-});
+// var storage = multer.diskStorage({
+//     destination: function(req, file, cb){
+//         cb(null, "/img/");
+//     },
+//     filename : function(req, file, cb){
+//         const ext = path.extname(file.originalname);
+//         cb(null, path.basename(file.originalname, ext) + "-" + Date.now() + ext);
+//     },
+// });
 
-var upload = multer({storage : storage});
+// var upload = multer({storage : storage});
 
 
 // 회원 정보 관리 Start -------------------------------------------------------------------------------
 
 // 회원가입
+// app.post('/SignUp', upload.single("image"), function(req,res){
+//     var id = req.body.user_id;
+//     var pw = req.body.user_pw;
+//     var nickname = req.body.user_nick;
+//     var total_studytime = 0
+//     var image = `/img/${req.file.filename}`;
+
+//     const datas = [id,pw,nickname,total_studytime,image];
+
+// 	var sql = 'insert into user(id, pw, nickname, total_studytime, img) values(?,?,?,?, ?)';
+//     connection.query(sql, datas, function(error,result){
+//         if(error){
+//             console.log(error);
+//             res.send({"state" : "실패"});
+
+//         } else{
+//             res.send({"state" : "성공"});
+//         }
+//     });
+// });
+
 app.post('/SignUp', upload.single("image"), function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
     var nickname = req.body.user_nick;
     var total_studytime = 0
-    var image = `/img/${req.file.filename}`;
-
+    //var image = `/img/${req.file.filename}`;
+    var image = '';
+    
     const datas = [id,pw,nickname,total_studytime,image];
 
 	var sql = 'insert into user(id, pw, nickname, total_studytime, img) values(?,?,?,?, ?)';
@@ -161,14 +183,16 @@ app.post('/MyInfo', function(req,res){
 // 스터디룸 생성
 app.post('/CreateStudyRoom', function(req, res){
     // 아이디로 바꾸끼
-    var user_idx = req.body.user_idx;
+    var user_id = req.body.user_id;
     var title = req.body.title;
     var desc = req.body.desc;
     var color = req.body.desc;
+    var total_studytime = 0
+    const datas = [user_id, title, desc, color, total_studytime]
 
-    var sql = 'insert into room_list(user_idx, title, descr, color) values(?, ?, ?, ?)';
+    var sql = 'insert into room_list(user_idx, title, descr, color, total_studytime) values(?, ?, ?, ?, ?)';
 
-    connection.query(sql, [user_idx,title,desc,color], function(error,result){
+    connection.query(sql, datas, function(error,result){
         if(error){
             console.log(error);
             res.send({"status" : "어쩔티비"});
