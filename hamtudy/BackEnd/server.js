@@ -110,14 +110,13 @@ app.post('/SignUp', function(req,res){
         if(error){
             console.log(error);
             res.send({"state" : "실패"});
+            res.end();
 
         } else{
             res.send({"state" : "성공"});
+            res.end();
         }
     });
-
-    res.end();
-
 });
 
 
@@ -135,12 +134,12 @@ app.post('/Login', function(req,res){
             var user_idx = result[0].idx;
             var user_nick = result[0].nickname;
             var user_id = id;
+            console.log("test");
             res.send({"user_id" : user_id,  "user_idx" : user_idx, "user_nick" : user_nick});
+            res.end();
         }
     });
 
-    res.end();
-    
 });
 
 
