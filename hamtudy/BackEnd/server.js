@@ -143,12 +143,12 @@ app.post('/Login', function(req,res){
 });
 
 
-// 회원 정보 수정
-app.post('/Modify', function(req,res){
+// 내정보
+app.post('/MyInfo', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
 
-	var sql = 'select idx, nickname from user where id = ? and pw = ?';
+	var sql = 'select idx, nickname, total_studytime, img from user where id = ? and pw = ?';
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
@@ -156,14 +156,17 @@ app.post('/Modify', function(req,res){
         } else{
             var user_idx = result[0].idx;
             var user_nick = result[0].nickname;
+            var total_studytime = result[0].total_studytime;
+            var img = result[0].img
             var user_id = id;
-            res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
+            res.send({"user_id" : user_id,  "user_idx" : user_idx, "user_nick" : user_nick,
+        "total_studytime" : total_studytime, "img" : img});
         }
     });
 });
 
-// 내정보
-app.post('/MyInfo', function(req,res){
+// 수정하기 ~ 수정할 데이터 뭐받을지 필요함 수정필요
+app.post('/Modify', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
 
@@ -193,10 +196,12 @@ app.post('/CreateStudyRoom', function(req, res){
     var title = req.body.title;
     var desc = req.body.desc;
     var color = req.body.desc;
-    var total_studytime = 0
-    const datas = [user_id, title, desc, color, total_studytime]
+    var total_studytime = 0;
+    var hashtag = req.body.hashtag;
+    var flag = 'TRUE';
+    const datas = [user_id, title, desc, color, total_studytime, hashtag, flag]
 
-    var sql = 'insert into room_list(user_id, title, descr, color, total_studytime) values(?, ?, ?, ?, ?)';
+    var sql = 'insert into room_list(user_id, title, descr, color, total_studytime, hashtag, flag) values(?, ?, ?, ?, ?, ?, ?)';
 
     connection.query(sql, datas, function(error,result){
         if(error){
