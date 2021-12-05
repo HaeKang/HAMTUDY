@@ -197,7 +197,7 @@ app.post('/CreateStudyRoom', function(req, res){
     var thumbnail = req.body.thumbnail;
     var total_studytime = 0;
     var hashtag = req.body.hashtag;
-    var flag = 'TRUE';
+    var flag = 'true';
     const datas = [user_id, title, desc, thumbnail, total_studytime, hashtag, flag]
 
     var sql = 'insert into room_list(user_id, title, descr, thumnail, total_studytime, hashtag, flag) values(?, ?, ?, ?, ?, ?, ?)';
