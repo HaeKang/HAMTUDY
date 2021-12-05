@@ -191,17 +191,16 @@ app.post('/Modify', function(req,res){
 
 // 스터디룸 생성
 app.post('/CreateStudyRoom', function(req, res){
-    // 아이디로 바꾸끼
     var user_id = req.body.user_id;
     var title = req.body.title;
     var desc = req.body.desc;
-    var color = req.body.desc;
+    var thumbnail = req.body.thumbnail;
     var total_studytime = 0;
     var hashtag = req.body.hashtag;
     var flag = 'TRUE';
-    const datas = [user_id, title, desc, color, total_studytime, hashtag, flag]
+    const datas = [user_id, title, desc, thumbnail, total_studytime, hashtag, flag]
 
-    var sql = 'insert into room_list(user_id, title, descr, color, total_studytime, hashtag, flag) values(?, ?, ?, ?, ?, ?, ?)';
+    var sql = 'insert into room_list(user_id, title, descr, thumnail, total_studytime, hashtag, flag) values(?, ?, ?, ?, ?, ?, ?)';
 
     connection.query(sql, datas, function(error,result){
         if(error){
