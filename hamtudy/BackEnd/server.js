@@ -3,6 +3,9 @@ const app = express();
 const cors = require('cors');
 const port = 8080;
 
+const multer = require("multer");
+const path = require("path");
+
 var connection = require("./routes/mysql_con");
 var bodyParser = require("body-parser");
 
@@ -52,25 +55,45 @@ app.post('/idToidx', function(req, res){
 
 });
 
+// 이미지
+// 이미지 파트
+var storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, "/img/");
+    },
+    filename : function(req, file, cb){
+        const ext = path.extname(file.originalname);
+        cb(null, path.basename(file.originalname, ext) + "-" + Date.now() + ext);
+    },
+});
+
+var upload = multer({storage : storage});
+
+
 // 회원 정보 관리 Start -------------------------------------------------------------------------------
 
 // 회원가입
-app.post('/SignUp', function(req,res){
+app.post('/SignUp', upload.single("image"), function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
     var nickname = req.body.user_nick;
     var total_studytime = 0
+    var image = `/img/${req.file.filename}`;
 
-	var sql = 'insert into user(id, pw, nickname, total_studytime) values(?,?,?,?)';
-    connection.query(sql, [id,pw,nickname, total_studytime], function(error,result){
+    const datas = [id,pw,nickname,total_studytime,image];
+
+	var sql = 'insert into user(id, pw, nickname, total_studytime, img) values(?,?,?,?, ?)';
+    connection.query(sql, datas, function(error,result){
         if(error){
             console.log(error);
             res.send({"state" : "실패"});
+
         } else{
             res.send({"state" : "성공"});
         }
     });
 });
+
 
 // 로그인
 app.post('/login', function(req,res){
