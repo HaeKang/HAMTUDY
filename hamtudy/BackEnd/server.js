@@ -205,7 +205,7 @@ app.post('/CreateStudyRoom', function(req, res){
     connection.query(sql, datas, function(error,result){
         if(error){
             console.log(error);
-            res.send({"status" : sql});
+            res.send({"status" : error});
         } else{
             res.send({"status" : "성공"});
         }
