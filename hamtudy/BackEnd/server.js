@@ -115,6 +115,9 @@ app.post('/SignUp', function(req,res){
             res.send({"state" : "성공"});
         }
     });
+
+    res.end();
+
 });
 
 
@@ -135,6 +138,9 @@ app.post('/Login', function(req,res){
             res.send({"user_id" : user_id,  "user_idx" : user_idx, "user_nick" : user_nick});
         }
     });
+
+    res.end();
+    
 });
 
 
