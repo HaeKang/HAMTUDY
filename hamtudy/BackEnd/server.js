@@ -132,7 +132,7 @@ app.post('/Login', function(req,res){
             var user_idx = result[0].idx;
             var user_nick = result[0].nickname;
             var user_id = id;
-            res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
+            res.send({"user_id" : user_id,  "user_idx" : user_idx, "user_nick" : user_nick});
         }
     });
 });
@@ -191,7 +191,7 @@ app.post('/CreateStudyRoom', function(req, res){
     var total_studytime = 0
     const datas = [user_id, title, desc, color, total_studytime]
 
-    var sql = 'insert into room_list(user_idx, title, descr, color, total_studytime) values(?, ?, ?, ?, ?)';
+    var sql = 'insert into room_list(user_id, title, descr, color, total_studytime) values(?, ?, ?, ?, ?)';
 
     connection.query(sql, datas, function(error,result){
         if(error){
