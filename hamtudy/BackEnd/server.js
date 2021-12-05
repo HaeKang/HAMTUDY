@@ -94,6 +94,7 @@ app.post('/idToidx', function(req, res){
 //     });
 // });
 
+// 얘는 됨
 app.post('/SignUp', function(req,res){
     var id = req.body.user_id;
     var pw = req.body.user_pw;
@@ -118,23 +119,23 @@ app.post('/SignUp', function(req,res){
 
 
 // 로그인
-// app.post('/Login', function(req,res){
-//     var id = req.body.user_id;
-//     var pw = req.body.user_pw;
+app.post('/Login', function(req,res){
+    var id = req.body.user_id;
+    var pw = req.body.user_pw;
 
-// 	var sql = 'select idx, nickname from user where id = ? and pw = ?';
-//     connection.query(sql, [id,pw], function(error,result){
-//         if(error){
-//             console.log(error);
-//             res.send({"state" : "실패"});
-//         } else{
-//             var user_idx = result[0].idx;
-//             var user_nick = result[0].nickname;
-//             var user_id = id;
-//             res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
-//         }
-//     });
-// });
+	var sql = 'select idx, nickname from user where id = ? and pw = ?';
+    connection.query(sql, [id,pw], function(error,result){
+        if(error){
+            console.log(error);
+            res.send({"state" : "실패"});
+        } else{
+            var user_idx = result[0].idx;
+            var user_nick = result[0].nickname;
+            var user_id = id;
+            res.send({"user_id" : id,  "user_idx" : user_idx, "user_nick" : user_nick});
+        }
+    });
+});
 
 
 // 회원 정보 수정
