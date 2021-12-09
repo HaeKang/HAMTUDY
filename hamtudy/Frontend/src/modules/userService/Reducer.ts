@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import * as ActionTypes from "./ActionTypes";
 
 interface DefaultState {
@@ -8,6 +7,7 @@ interface DefaultState {
     authError?:boolean|null
 }
 
+// 왜 user 추가하면 header.tsx 에서 useSelector 오류가 나지 ㅋㅋ
 const user_state:DefaultState= {
     auth:false,
 };
@@ -39,6 +39,7 @@ const userService = (state:DefaultState=user_state, action:ActionTypes.UserServi
         }
         case ActionTypes.LOGOUT_REQUEST:{
             return{
+                ...state,
                 auth:false
             }
         }

@@ -1,4 +1,3 @@
-import axios from "axios";
 import client from "../../lib/api/client";
 import { Dispatch } from "react";
 import * as ActionTypes from "./ActionTypes";

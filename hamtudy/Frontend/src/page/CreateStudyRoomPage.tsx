@@ -1,10 +1,13 @@
 import React, { MouseEventHandler, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import {theme} from "../assets/theme/theme";
 import RoomThumnail from "../components/RoomThumbnail"
+import { RootStore } from "../Store";
+import { createStudyroom } from "../modules/studyroom/Actions";
 
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +44,7 @@ const tumbnailscolors:string[] = ["#343a40", "#f03e3e", "#12b886", "#228ae6"];
 
 type PalleteProps = {
     tumbnailscolors:string[],
-    onSelect:(e:Event)=>void
+    onSelect:(e: React.MouseEvent<HTMLDivElement>)=>void
 }
 
 function Pallete({ tumbnailscolors, onSelect }:PalleteProps) {
@@ -50,18 +53,20 @@ function Pallete({ tumbnailscolors, onSelect }:PalleteProps) {
       className="color"
       style={{ backgroundColor: color }}
       data-value={color}
-      onClick={()=>onSelect}
-    ></div>
+      onClick={onSelect}>
+      </div>
   ));
   return <Colors>{colorList}</Colors>;
 }
 
 function CreateStudyRoomPage() {
+  const distpach = useDispatch();
+  const user_id = useSelector((state:RootStore)=>state.userService.user?.user_id) as string;
   const [inputs, setInputs] = useState({
     title: "",
-    describe: "",
+    desc: "",
   });
-  const { title, describe } = inputs;
+  const { title, desc } = inputs;
   const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setInputs({
@@ -70,14 +75,21 @@ function CreateStudyRoomPage() {
     });
   };
 
-  const [color, setColor] = useState("");
-  const onSelect = (e:Event) => {
+  const [thumbnail, setThumbnail] = useState("");
+  const onSelect = (e: React.MouseEvent<HTMLDivElement>) => {
     let element = e.target as HTMLElement;
-    setColor(element.style.backgroundColor);
+    const color =element.getAttribute("data-value") as string;
+    setThumbnail(color);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement> )=>{
+    e.preventDefault();
+    console.log("submit?!")
+    distpach(createStudyroom({user_id,title,desc,thumbnail})) 
+  }
+
   return (
-    <Wrapper>
+    <Wrapper onSubmit={handleSubmit}>
       <h1>어떤 공부를 할 계획인가요?</h1>
       <div>
         <h3>방제목</h3>
@@ -85,14 +97,14 @@ function CreateStudyRoomPage() {
           <Input name={"title"} onChange={onChange} type="text" />
         </div>
         <h3>설명</h3>
-        <Input name={"describe"} onChange={onChange} type="text" />
+        <Input name={"desc"} onChange={onChange} type="text" />
         <h3>종류</h3>
         <h3>색깔</h3>
         <Pallete tumbnailscolors={tumbnailscolors} onSelect={onSelect} />
 
         <h3>썸네일</h3>
-        <RoomThumnail title={title} describe={describe} color={color} />
-        <ButtonSubmit type="submit">만들기</ButtonSubmit>
+        <RoomThumnail title={title} desc={desc} color={thumbnail} />
+        <button type="submit">만들기</button>
       </div>
     </Wrapper>
   );

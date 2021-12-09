@@ -37,16 +37,16 @@ export interface LogoutRequest{
 }
 
 //signup 액션 생성 함수
-export interface SIGNUP_REQUEST{
+export interface SignupRequest{
     type:typeof SIGNUP_REQUEST,
 }
-export interface SIGNUP_SUCCESS{
+export interface SignupSuccess{
     type:typeof SIGNUP_SUCCESS,
     payload:User
 }
-export interface SIGNUP_ERROR{
+export interface SignupError{
     type:typeof SIGNUP_ERROR,
 }
 
-export type UserServiceTypes = LoginError|LoginRequest|LoginSuccess|LogoutRequest|SIGNUP_ERROR|SIGNUP_REQUEST|SIGNUP_SUCCESS;
+export type UserServiceTypes = LoginError|LoginRequest|LoginSuccess|LogoutRequest|SignupSuccess|SignupRequest|SignupError;
 
