@@ -3,7 +3,6 @@ import { Dispatch } from "react";
 import * as ActionTypes from "./ActionTypes";
 
 export const createStudyroom = ({user_id,title,desc,thumbnail,hashtag}:ActionTypes.Studyroom) => async (dispatch:Dispatch<ActionTypes.StudyRoomTypes>) =>{
-    console.log("hi??");
     try{
         dispatch({type:ActionTypes.CREATE_STUDYROOM});
         const res = await client.post("/CreateStudyRoom",{user_id,title,desc,thumbnail,hashtag});

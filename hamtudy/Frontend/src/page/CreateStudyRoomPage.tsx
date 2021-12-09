@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import {theme} from "../assets/theme/theme";
@@ -62,6 +62,12 @@ function Pallete({ tumbnailscolors, onSelect }:PalleteProps) {
 function CreateStudyRoomPage() {
   const distpach = useDispatch();
   const user_id = useSelector((state:RootStore)=>state.userService.user?.user_id) as string;
+  const create_success = useSelector((state:RootStore)=>state.studyRoom.createSuccess) as boolean;
+
+  useEffect(()=>{
+    console.log("createsuceess change",create_success);
+  },[create_success])
+
   const [inputs, setInputs] = useState({
     title: "",
     desc: "",

@@ -12,7 +12,7 @@ const user_state:DefaultState= {
     auth:false,
 };
 
-const userService = (state:DefaultState=user_state, action:ActionTypes.UserServiceTypes)=>{
+const userService = (state:DefaultState=user_state, action:ActionTypes.UserServiceTypes):DefaultState=>{
     switch(action.type){
         //로그인
         case ActionTypes.LOGIN_ERROR:{

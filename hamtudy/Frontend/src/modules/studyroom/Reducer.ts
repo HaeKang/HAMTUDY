@@ -6,10 +6,10 @@ interface DefaultState{
 }
 
 const studyroomState:DefaultState={
-
+    createSuccess:null,
 }
 
-const studyRoom = (state:DefaultState=studyroomState,action:ActionTypes.StudyRoomTypes)=>{
+const studyRoom = (state:DefaultState=studyroomState,action:ActionTypes.StudyRoomTypes):DefaultState=>{
     switch(action.type){
         case ActionTypes.CREATE_STUDYROOM:{
             return{
@@ -24,7 +24,7 @@ const studyRoom = (state:DefaultState=studyroomState,action:ActionTypes.StudyRoo
         }
         case ActionTypes.CREATE_STUDYROOM_SUCCESS:{
             return{
-                createSuceess:true,
+                createSuccess:true,
                 createError:null
             }
         }
