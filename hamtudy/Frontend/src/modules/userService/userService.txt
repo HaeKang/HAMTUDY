@@ -1,0 +1,145 @@
+import axios from "axios";
+import baseURL from "../../utils/API";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "..";
+import { Action } from "redux";
+import * as authAPI from "../../lib/api/auth";
+// 액션 타입
+const LOGIN_REQUEST = 'loginServiece/LOGIN_REQUEST' as const;
+const LOGIN_SUCCESS = "loginService/LOGIN_SUCCESS" as const;
+const LOGIN_ERROR ="loginService/LOGIN_ERROR" as const;
+const AUTH_USER = 'loginServiece/AUTH_USER' as const;
+const LOGOUT_REQUEST= 'loginServiece/LOGOUT_REQUEST' as const;
+const SIGN_UP ="loginServiece/SIGN_UP" as const;
+
+// 액션 생성함수
+/**
+ * 
+const req:any = axios.post(baseURL + "/SignUp", data).then((res) => {
+      return { type: SIGN_UP, payload: req };
+    })
+    return{ type: SIGN_UP, payload: req };
+ */
+// export const loginRequest = (data:{user_id:string,user_pw:string}) => {
+//     const req:any = axios.post(baseURL + "/Login", data).then((res) => {
+//       return {
+//         type: LOGIN_REQUEST,
+//         payload: res.data,
+//       };
+//     }).catch(((err: Error )=>{
+//       console.log(err);
+//     }))
+
+//     console.log("req",req);
+//     return{
+//       type: LOGIN_REQUEST,
+//       payload: data,
+//     }
+// }
+export async function loginRequest (user_id:string,user_pw:string){
+      try{
+        const data = await authAPI.login(user_id,user_pw);
+        return({type:LOGIN_SUCCESS,payload:data});
+      }catch(e){
+        return({type:LOGIN_ERROR});
+      }
+}
+
+  export const logoutRequest = () => ({
+    type: LOGOUT_REQUEST,
+  });
+  
+  export const authUser = ({ id, nickname, token }:{id:string, nickname:string, token:string}) => ({
+    type: AUTH_USER,
+    payload: {
+      id,
+      nickname,
+      token,
+    },
+  });
+  
+  export function signUp(data:{user_id:string, user_pw:string, user_nick:string}) {
+    const req:any = axios.post(baseURL + "/SignUp", data).then((res) => {
+      console.log("res?",res);
+      return { type: SIGN_UP, payload: req };
+    }).then((res)=>{
+      console.log("res????",res);
+    }).catch(((err: Error )=>{
+      console.log(err);
+    }))
+    return{ type: SIGN_UP, payload: req };
+  }
+
+// 액션 타입
+type UserServiceAction = |ReturnType<typeof loginRequest>|ReturnType<typeof logoutRequest>|ReturnType<typeof authUser>|ReturnType<typeof signUp>;
+
+  
+// 상태 타입
+type UserInfo = {
+  userInfo:
+  {
+    id: string,
+    nickname: string,
+    token: string,
+  },
+  auth:string
+}
+// 초기 상태
+const user_state:UserInfo= {
+  userInfo: {
+    id: "",
+    nickname: "",
+    token: "",
+  },
+  auth: "",
+};
+  
+
+// 리듀서
+function userService(
+  state:UserInfo= user_state, 
+  action:UserServiceAction
+):UserInfo {
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        auth: "SUCCESS",
+        userInfo: {
+          id: "",
+          nickname:action.payload,
+          token:""
+          // nickname: action.payload.user_nick,
+          // token: action.payload.token,
+        },
+      };
+
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        auth: "",
+        userInfo: {
+          id: "",
+          nickname: "",
+          token: "",
+        },
+      };
+    // case AUTH_USER:
+    //   return {
+    //     ...state,
+    //     auth: "SUCCESS",
+    //     userInfo: {
+    //       id: action.payload.id,
+    //       nickname: action.payload.nickname,
+    //       token: action.payload.token,
+    //     },
+    //   };
+    case SIGN_UP:
+      return state;
+
+    default:
+      return state;
+     }
+}
+
+export default userService;

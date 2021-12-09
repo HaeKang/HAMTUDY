@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { logoutRequest } from "../modules/userService";
 import profile from "../assets/img/profile.jpeg";
 import {theme} from "../assets/theme/theme";
 import Logo from "./Logo";
-import {RootState} from "../modules";
 import Search from "./Search";
 import Modal from "./modals/Modal";
+import { RootStore } from "../Store";
+import { logout } from "../modules/userService/Actions";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -56,7 +56,7 @@ const NavWrapper = styled.nav`
 
 function Header() {
   const dispatch = useDispatch();
-  const auth = useSelector((state:RootState) => state.userService.auth);
+  const auth = useSelector((state:RootStore) => state.userService.auth);
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
@@ -64,10 +64,10 @@ function Header() {
   const closeModal = () => {
     setModalOpen(!modalOpen);
   };
-  const logout = () => {
-    dispatch(logoutRequest());
-    localStorage.clear();
-  };
+  // const logout = () => {
+  //   dispatch(logoutRequest());
+  //   localStorage.clear();
+  // };
 
   return (
     <>
@@ -75,7 +75,7 @@ function Header() {
         <Logo/>
         <NavWrapper>
           <Search />
-          {auth == "SUCCESS" && (
+          {auth && (
             <>
               <li>
                 <div className="my-info-wrapper">
@@ -94,13 +94,16 @@ function Header() {
                       </Link>
                     </li>
                     <li>
-                      <div onClick={logout}>로그아웃</div>
+                      <div onClick={()=>{
+                        dispatch(logout())
+                      }}>로그아웃</div>
                     </li>
+                   
                   </div>
                 </div>
               </li>
               <li></li>
-            </>
+             </>
           )}
           {!auth && (
             <>

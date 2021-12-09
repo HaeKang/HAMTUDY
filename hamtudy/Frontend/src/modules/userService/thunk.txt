@@ -1,0 +1,16 @@
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "..";
+import { Action } from "redux";
+import * as authAPI from "../../lib/api/auth";
+
+export function loginRequest (user_id:string,user_pw:string):ThunkAction<void,RootState,null,Action<string>>{
+    return async dispatch =>{
+        try{
+          const data = await authAPI.login({user_id,user_pw});
+          dispatch({type:LOGIN_SUCCESS,payload:data});
+        }catch(e){
+          dispatch(LOGIN_ERROR);
+        }
+    }
+  }
+  

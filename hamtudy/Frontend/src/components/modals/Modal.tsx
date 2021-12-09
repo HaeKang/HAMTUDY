@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {theme} from "../../assets/theme/theme";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginRequest } from "../../modules/userService";
+import { login } from "../../modules/userService/Actions";
 import profile from "../../assets/img/profile.jpeg";
 
 const ModalBlcok = styled.div`
@@ -85,6 +85,10 @@ const ModalBlcok = styled.div`
     }
   }
 `;
+
+const FormBlock = styled.form`
+`
+
 type InputType = {
     id:string,
     pwd:string
@@ -107,13 +111,7 @@ const Modal = (props:any) => {
       [name]: value,
     });
   };
-  const onClick = () => {
-    dispatch(
-      loginRequest({
-        user_id: id,
-        user_pw: pwd,
-      })
-    )
+  const onClick = (e:React.MouseEventHandler<HTMLButtonElement>) => {
     //   .then((res:any) => {
     //     close();
     //     localStorage.setItem(
@@ -126,6 +124,14 @@ const Modal = (props:any) => {
     //   })
     //   .catch((err:any) => window.alert(err+ "로그인 실패!"));
   };
+
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    console.log("btn !");
+    dispatch(
+      login(id,pwd)
+    );
+  }
 
   return (
     <>
@@ -145,11 +151,12 @@ const Modal = (props:any) => {
                   <div className="title">
                     <h3>로그인</h3>
                   </div>
+                  <FormBlock onSubmit={handleSubmit}>
                   <div>
                     <input
                       name="id"
                       value={id}
-                      onChange={()=>onChange}
+                      onChange={onChange}
                       type="text"
                       placeholder="아이디를 입력하세요."
                     ></input>
@@ -158,14 +165,15 @@ const Modal = (props:any) => {
                     <input
                       name="pwd"
                       value={pwd}
-                      onChange={()=>onChange}
+                      onChange={onChange}
                       type="password"
                       placeholder="비밀번호를 입력하세요."
                     ></input>
                   </div>
                   <div>
-                    <button onClick={onClick}>로그인</button>
+                    <button type="submit"  >로그인</button>
                   </div>
+                  </FormBlock>
                   <Link className="sign_up" to="/sign_up">
                     <div onClick={close}>회원가입</div>
                   </Link>
