@@ -70,9 +70,9 @@ function CreateStudyRoomPage() {
 
   const [inputs, setInputs] = useState({
     title: "",
-    desc: "",
+    descr: "",
   });
-  const { title, desc } = inputs;
+  const { title, descr } = inputs;
   const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setInputs({
@@ -91,7 +91,7 @@ function CreateStudyRoomPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement> )=>{
     e.preventDefault();
     console.log("submit?!")
-    distpach(createStudyroom({user_id,title,desc,thumbnail})) 
+    distpach(createStudyroom({user_id,title,descr,thumbnail})) 
   }
 
   return (
@@ -109,7 +109,7 @@ function CreateStudyRoomPage() {
         <Pallete tumbnailscolors={tumbnailscolors} onSelect={onSelect} />
 
         <h3>썸네일</h3>
-        <RoomThumnail title={title} desc={desc} color={thumbnail} />
+        <RoomThumnail title={title} descr={descr} color={thumbnail} />
         <button type="submit">만들기</button>
       </div>
     </Wrapper>

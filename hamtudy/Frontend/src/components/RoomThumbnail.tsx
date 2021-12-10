@@ -23,16 +23,16 @@ const ThumnailWrapper = styled.div`
 
 type RoomThumbnailProps = {
     title:string,
-    desc:string,
+    descr:string,
     color?:string
 }
 
-function RoomThumbnail({ title, desc, color }:RoomThumbnailProps) {
+function RoomThumbnail({ title, descr, color }:RoomThumbnailProps) {
   return (
     <ThumnailWrapper color={color}>
       <div className="info">
         <h3 className="RoomThumbnailPropstitle">{title}</h3>
-        <h3 className="describe">{desc}</h3>
+        <h3 className="describe">{descr}</h3>
       </div>
     </ThumnailWrapper>
   );
