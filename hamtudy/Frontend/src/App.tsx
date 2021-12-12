@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import GlobalStyle from "./assets/styles/GlobalStyle";
-import { authUser } from "./modules/userService";
 import Main from "./page/Main"
 import StudyRoomPage from "./page/StudyRoomPage";
 import CreateStudyRoomPage from "./page/CreateStudyRoomPage";

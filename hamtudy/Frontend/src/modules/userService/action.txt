@@ -1,0 +1,62 @@
+// import { ThunkAction, ThunkDispatch } from 'redux-thunk'
+// import { AnyAction } from 'redux';
+
+// // 상태 타입
+// type UserInfo = {
+//     userInfo:
+//     {
+//       id: string,
+//       nickname: string,
+//       token: string,
+//     },
+//     auth:string
+//   }
+//   // 초기 상태
+//   const user_state:UserInfo= {
+//     userInfo: {
+//       id: "",
+//       nickname: "",
+//       token: "",
+//     },
+//     auth: "",
+//   };
+    
+
+// // 액션 정의
+// export interface LOGIN_REQUEST {
+//     type:"LOGIN_REQUEST",
+//     user_id:string,
+//     user_pw:string
+// }
+
+// export interface LOGIN_SUCCESS{
+//     type:"LOGIN_SUCCESS",
+//     payload:{user_id:string, user_nick:string}
+// }
+
+// export interface LOGIN_FAILURE{
+//     type:"LOGIN_FAILURE",
+// }
+
+// // 액션 유니온
+// export type LoginAction = LOGIN_REQUEST|LOGIN_SUCCESS|LOGIN_FAILURE;
+
+// // 액션 생성 함수
+
+
+// export const login = (user_id:string,user_pw:string):ThunkAction<Promise<void>, {}, {}, AnyAction>=>{
+//     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+//         return new Promise<void>((resolve) => {
+//           dispatch(isFetching(true))
+//           console.log('Login in progress')
+//     setTimeout(() => {
+//             dispatch(set('this_is_access_token'))
+//     setTimeout(() => {
+//               dispatch(isFetching(false))
+//               console.log('Login done')
+//               resolve()
+//             }, 1000)
+//     }, 3000)
+//         })
+//       }
+// }

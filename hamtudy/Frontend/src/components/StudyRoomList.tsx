@@ -99,7 +99,7 @@ function StudyRoomList({ studyrooms }:StudyRoomListProps) {
             <Link to={"/room/" + studyroom.title}>
               <RoomThumbnail
                 title={studyroom.title}
-                describe={studyroom.describe}
+                descr={studyroom.describe}
                 color={studyroom.color}
               />
             </Link>
