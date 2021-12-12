@@ -109,7 +109,7 @@ app.post('/SignUp', function(req,res){
     connection.query(sql, datas, function(error,result){
         if(error){
             console.log(error);
-            res.send({"state" : "실패"});
+            res.status(404).send('Sorry, we cannot find SignUp!');
             res.end();
 
         } else{
@@ -129,7 +129,7 @@ app.post('/Login', function(req,res){
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
-            res.send({"state" : "실패"});
+            res.status(404).send('Sorry, we cannot find Login!');
         } else{
             var user_idx = result[0].idx;
             var user_nick = result[0].nickname;
@@ -152,7 +152,7 @@ app.post('/MyInfo', function(req,res){
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
-            res.send({"state" : "실패"});
+            res.status(404).send('Sorry, we cannot find MyInfo!');
         } else{
             var user_idx = result[0].idx;
             var user_nick = result[0].nickname;
@@ -174,7 +174,7 @@ app.post('/Modify', function(req,res){
     connection.query(sql, [id,pw], function(error,result){
         if(error){
             console.log(error);
-            res.send({"state" : "실패"});
+            res.status(404).send('Sorry, we cannot find Modify!');
         } else{
             var user_idx = result[0].idx;
             var user_nick = result[0].nickname;
@@ -204,8 +204,7 @@ app.post('/CreateStudyRoom', function(req, res){
 
     connection.query(sql, datas, function(error,result){
         if(error){
-            console.log(error);
-            res.send({"status" : error});
+            res.status(404).send('Sorry, we cannot find CreateStudyRoom!');
         } else{
             res.send({"status" : "성공"});
         }
@@ -220,8 +219,7 @@ app.post('/ListStudyRoom', function(req, res){
 
     connection.query(sql,  function(error,result){
         if(error){
-            console.log(error);
-            res.send({"status" : "어쩔티비"});
+            res.status(404).send('Sorry, we cannot find ListStudyRoom!');
         } else{
             res.send(result);
         }
@@ -238,8 +236,7 @@ app.post('/ListMyStudyRoom', function(req, res){
     var sql = 'select * from room_list where user_id = ?';
     connection.query(sql, [user_id], function(err, result){
         if(err){
-            console.log(err);
-            res.send({"state" : "실패"});
+            res.status(404).send('Sorry, we cannot find ListMyStudyRoom!');
         } else{
             res.send(result);
         }
@@ -257,9 +254,7 @@ app.post('/DeleteStudyRoom', function(req, res){
         if(error){
 
             console.log(error);
-            // 실패하는 경우엔 참여자가 한명 이상이기 때문
-            // cascade 추가하던가.. 머.. 어케 할지 고민
-            res.send({"state" : "삭제실패", "errmsg" : error});
+            res.status(404).send('Sorry, we cannot find DeleteStudyRoom!');
 
         } else{
             res.send({"state" : "성공"});
@@ -285,7 +280,7 @@ app.post('/JoinStudyRoom', function(req, res){
         if(error){
 
             console.log(error);
-            res.send({"status" : "조회실패"});
+            res.status(404).send('Sorry, we cannot find JoinStudyRoom!');
 
         } else{
             // 스터디룸 참여 실행
@@ -317,7 +312,7 @@ app.post('/ExitStudyRoom', function(req, res){
         if(error){
 
             console.log(error);
-            res.send({"state" : "조회실패"});
+            res.status(404).send('Sorry, we cannot find ExitStudyRoom!');
 
         } else{
             // join_info delete 수행 ~ 실행안됨
