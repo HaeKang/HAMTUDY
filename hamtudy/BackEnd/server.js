@@ -347,7 +347,7 @@ app.post('/JoinStudyRoom', function(req, res){
     var user_id = req.body.user_id;
 
     // 스터디룸 참여 실행
-    var sql = 'insert into join_info(room_id, user_id) values(?,?)';
+    var sql = 'insert into join_info(room_id, user_id,flag) values(?,?,"True")';
 
     connection.query(sql, [room_id, user_id], function(err, result){
         if(err){
@@ -375,7 +375,7 @@ app.post('/ExitStudyRoom', function(req, res){
             res.status(404).send('Sorry, we cannot find ExitStudyRoom!');
 
         } else{
-            res.send({"status" : "성공"});
+            res.send(result);
         }
     });
 
