@@ -212,7 +212,7 @@ app.post('/CreateStudyRoom', function(req, res){
 
 });
 
-// 전체 스터디룸 목록
+// 전체 스터디룸 목록 -> get
 app.post('/ListStudyRoom', function(req, res){
     // room_id, user_idx, title, descr
     var sql = 'select * from room_list';
@@ -247,7 +247,7 @@ app.post('/ListStudyRoom', function(req, res){
 });
 
 
-// 내가 만든 스터디룸 목록
+// 내가 만든 스터디룸 목록 -> get
 app.post('/ListMyStudyRoom', function(req, res){
     var user_id = req.body.user_id;
 
@@ -257,13 +257,65 @@ app.post('/ListMyStudyRoom', function(req, res){
         if(err){
             res.status(404).send('Sorry, we cannot find ListMyStudyRoom!');
         } else{
-            res.send(result);
+            var result_list = new Array();
+
+            for (var i = 0; i < result.length; i++){
+                
+                var data = new Object();
+
+                data.room_id =  result[i].ROOM_ID;
+                data.title = result[i].TITLE;
+                data.descr = result[i].DESCR;
+                data.thumbnail = result[i].THUMNAIL;
+                data.total_studytime =  result[i].TOTAL_STUDYTIME;
+                data.hashtag = result[i].HASHTAG;
+                data.flag = result[i].FLAG;
+                data.user_id = result[i].user_id;
+
+                result_list.push(data);
+            }
+            
+            var jsonData = JSON.stringify(result_list);
+            res.send(jsonData);
         }
     });
 
 });
 
-// [수정필요] 스터디룸 삭제
+// 내가 참여중인 스터디룸 목록
+app.post('/ListJoinStudyRoom', function(req,res){
+    var user_id = req.body.user_id;
+
+    var sql = 'select * from room_list where room_id = (select room_id from join_info where user_id = ?)';
+    connection.query(sql, [user_id], function(err, result){
+        if(err){
+            res.status(404).send('Sorry, we cannot find ListJoinStudyRoom!');
+        } else{
+            var result_list = new Array();
+
+            for (var i = 0; i < result.length; i++){
+                
+                var data = new Object();
+
+                data.room_id =  result[i].ROOM_ID;
+                data.title = result[i].TITLE;
+                data.descr = result[i].DESCR;
+                data.thumbnail = result[i].THUMNAIL;
+                data.total_studytime =  result[i].TOTAL_STUDYTIME;
+                data.hashtag = result[i].HASHTAG;
+                data.flag = result[i].FLAG;
+                data.user_id = result[i].user_id;
+
+                result_list.push(data);
+            }
+            
+            var jsonData = JSON.stringify(result_list);
+            res.send(jsonData);
+        }
+    });
+});
+
+// [제약조건 추가 필요] 스터디룸 삭제
 app.post('/DeleteStudyRoom', function(req, res){
     var room_id = req.body.room_id;
 
@@ -282,6 +334,8 @@ app.post('/DeleteStudyRoom', function(req, res){
 
 });
 
+
+
 // StudyRoom Create & list & delete End -------------------------------------------------------------------------------
 
 
@@ -292,62 +346,39 @@ app.post('/JoinStudyRoom', function(req, res){
     var room_id = req.body.room_id;
     var user_id = req.body.user_id;
 
-    var sql_user_idx = 'select useridx from user where user_id = ?';
+    // 스터디룸 참여 실행
+    var sql = 'insert into join_info(room_id, user_id) values(?,?)';
 
-    // user_idx 구함
-    connection.query(sql_user_idx, [user_id], function(error,result){
-        if(error){
-
+    connection.query(sql, [room_id, user_id], function(err, result){
+        if(err){
             console.log(error);
             res.status(404).send('Sorry, we cannot find JoinStudyRoom!');
 
         } else{
-            // 스터디룸 참여 실행
-            var user_idx = result[0].useridx
-            var sql = 'insert into join_info(room_id, user_idx) values(?,?)';
-            connection.query(sql, [room_id, user_idx], function(err, result){
-                if(err){
-                    console.log(err);
-                    res.send({"status" : "어쩔티비"});
-                } else{
-                    res.send({"status" : "성공"});
-                }
-            });
-
+            res.send({"status" : "성공"});
         }
     });
 
 });
  
-//[수정필요] 스터디룸 나가기 ~ 실행안됨
+//[제약조건 필요] 스터디룸 나가기
 app.post('/ExitStudyRoom', function(req, res){
     var room_id = req.body_room_id;
     var user_id =  req.body.user_id;
 
-    var sql_user_idx = 'select useridx from user where user_id = ?';
+    // 스터디룸 나가기 실행
+    var sql = 'delete from join_info where room_id = ? and user_id = ?';
 
-    // user_idx 구함
-    connection.query(sql_user_idx, [user_id], function(error,result){
-        if(error){
-
+    connection.query(sql, [room_id, user_id], function(err, result){
+        if(err){
             console.log(error);
             res.status(404).send('Sorry, we cannot find ExitStudyRoom!');
 
         } else{
-            // join_info delete 수행 ~ 실행안됨
-            var user_idx = result[0].useridx
-            var sql = 'delete from join_info where room_id = ? and user_idx = ?';
-            connection.query(sql, [room_id, user_idx], function(err, result){
-                if(err){
-                    console.log(err);
-                    res.send({"state" : "삭제실패"});
-                } else{
-                    res.send({"state" : "성공"});
-                }
-            });
-
+            res.send({"status" : "성공"});
         }
     });
+
 });
 
 // StudyRoom Join & Out End -------------------------------------------------------------------------------
