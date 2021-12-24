@@ -347,7 +347,7 @@ app.post('/JoinStudyRoom', function(req, res){
     var user_id = req.body.user_id;
 
     // 스터디룸 참여 실행
-    var sql = 'insert into join_info(room_id, user_id,flag) values(?,?,"True")';
+    var sql = 'insert into join_info(room_id, user_id,flag) values(?,?,1)';
 
     connection.query(sql, [room_id, user_id], function(err, result){
         if(err){
