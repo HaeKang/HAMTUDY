@@ -221,23 +221,26 @@ app.post('/ListStudyRoom', function(req, res){
         if(error){
             res.status(404).send('Sorry, we cannot find ListStudyRoom!');
         } else{
-            var room_id = result[0].ROOM_ID;
-            var title = result[0].TITLE;
-            var descr = result[0].DESCR;
-            var thumbnail = result[0].THUMNAIL;
-            var total_studytime =  result[0].TOTAL_STUDYTIME;
-            var hashtag = result[0].HASHTAG;
-            var flag = result[0].FLAG;
-            var user_id = result[0].user_id;
+            var result_list = new Array();
 
-            res.send({"room_id" : room_id,  
-            "title" : title, 
-            "descr" : descr,
-            "thumbnail" : thumbnail,
-            "total_studytime" : total_studytime,
-            "hashtag" : hashtag,
-            "flag" : flag,
-            "user_id" : user_id});
+            for (var i = 0; i < result.length; i++){
+                
+                var data = new Object();
+
+                data.room_id =  result[i].ROOM_ID;
+                data.title = result[i].TITLE;
+                data.descr = result[i].DESCR;
+                data.thumbnail = result[i].THUMNAIL;
+                data.total_studytime =  result[i].TOTAL_STUDYTIME;
+                data.hashtag = result[i].HASHTAG;
+                data.flag = result[i].FLAG;
+                data.user_id = result[i].user_id;
+
+                result_list.push(data);
+            }
+            
+            var jsonData = JSON.stringify(result_list);
+            res.send(jsonData);
         }
     });
 
