@@ -285,8 +285,8 @@ app.post('/ListMyStudyRoom', function(req, res){
 // 내가 참여중인 스터디룸 목록
 app.post('/ListJoinStudyRoom', function(req,res){
     var user_id = req.body.user_id;
-
-    var sql = 'select * from room_list where room_id = (select room_id from join_info where user_id = ?)';
+    
+    var sql = 'select * from room_list where room_id IN (select room_id from join_info where user_id = ?)';
     connection.query(sql, [user_id], function(err, result){
         if(err){
             res.status(404).send('Sorry, we cannot find ListJoinStudyRoom!');
