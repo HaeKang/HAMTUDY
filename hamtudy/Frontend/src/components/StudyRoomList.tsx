@@ -5,6 +5,7 @@ import {theme} from "../assets/theme/theme";
 import time_svg from "../assets/icon/time.svg";
 import participants_svg from "../assets/icon/participants.svg";
 import RoomThumbnail from "./RoomThumbnail"
+import {Studyroom as StudyRoomType} from "../modules/studyroom/ActionTypes";
 
 const Wrapper = styled.div`
   display: flex;
@@ -77,15 +78,10 @@ const CardWrapper = styled.div`
   }
 `;
 
-interface StudyRoom {
-    title:string,
-    describe:string,
-    color?:string|undefined,
-    participants:number
-}
+
 
 type StudyRoomListProps = {
-    studyrooms :StudyRoom[]
+    studyrooms :StudyRoomType[]
 }
 
 
@@ -99,8 +95,8 @@ function StudyRoomList({ studyrooms }:StudyRoomListProps) {
             <Link to={"/room/" + studyroom.title}>
               <RoomThumbnail
                 title={studyroom.title}
-                descr={studyroom.describe}
-                color={studyroom.color}
+                descr={studyroom.descr}
+                color={studyroom.thumbnail}
               />
             </Link>
 

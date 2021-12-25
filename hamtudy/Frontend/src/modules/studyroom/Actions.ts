@@ -16,7 +16,6 @@ export const createStudyroom = ({user_id,title,descr,thumbnail,hashtag}:ActionTy
 
 export const getStudyroomAll = ()=> async (dispatch:Dispatch<ActionTypes.StudyRoomTypes>)=>{
     try{
-        console.log("dnanfka?")
         dispatch({type:ActionTypes.GET_STUDYROOM_ALL_LOADING});
         const res = await client.post<ActionTypes.Studyroom[]>("/ListStudyRoom");
         console.log("res?",res.data);

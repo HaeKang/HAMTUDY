@@ -56,6 +56,7 @@ const NavWrapper = styled.nav`
 
 function Header() {
   const dispatch = useDispatch();
+
   const auth = useSelector((state:RootStore) => state.userService.auth);
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {

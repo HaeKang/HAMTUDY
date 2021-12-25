@@ -2,13 +2,13 @@ import * as ActionTypes from "./ActionTypes";
 
 
 interface DefaultState{
-    studyrooms:ActionTypes.Studyroom[]|null,
+    studyrooms:ActionTypes.Studyroom[],
     createSuccess?:null|boolean,
     createError?:null|boolean,
 }
 
 const studyroomState:DefaultState={
-    studyrooms:null
+    studyrooms:[]
 }
 
 const studyRoom = (state:DefaultState=studyroomState,action:ActionTypes.StudyRoomTypes):DefaultState=>{

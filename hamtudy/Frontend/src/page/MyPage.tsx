@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Template from "../components/Template";
 import profile from "../assets/img/profile.jpeg";
+import { RootStore } from "../Store";
 
 function Mypage() {
-    const user_nick="a";
-//   const user_nick = useSelector((state) => state.userInfo.nickname);
+  const user_nick = useSelector((state:RootStore) => state.userService.user?.user_nick);
 
   console.log(user_nick);
   return (
