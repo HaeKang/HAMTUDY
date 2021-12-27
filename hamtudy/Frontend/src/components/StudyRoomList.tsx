@@ -92,7 +92,7 @@ function StudyRoomList({ studyrooms }:StudyRoomListProps) {
       <CardsWrapper>
         {studyrooms.map((studyroom) => (
           <CardWrapper className="studyroom">
-            <Link to={"/room/" + studyroom.title}>
+            <Link to={"/room/" + studyroom.room_id}>
               <RoomThumbnail
                 title={studyroom.title}
                 descr={studyroom.descr}

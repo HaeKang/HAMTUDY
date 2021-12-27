@@ -9,6 +9,7 @@ import { RootStore } from "../Store";
 import { useDispatch, useSelector } from "react-redux";
 import { enterStudyroom } from "../modules/studyroom/Actions";
 import rootReducer from "../modules";
+import { RouteComponentProps } from "react-router";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,11 +44,17 @@ const Wrapper = styled.div`
   }
 `;
 
-function StudyRoom() {
+interface Params{
+  room:string
+}
+
+function StudyRoom({match}:RouteComponentProps<Params>) {
+  const room_id = match.params.room
   const user_id = useSelector((state:RootStore) => state.userService.user?.user_id);
+
   const dispatch = useDispatch();
   useEffect(()=>{
-    // dispatch(enterStudyroom({user_id,}))
+    dispatch(enterStudyroom({user_id,room_id}))
   },[]);
 
 
