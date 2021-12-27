@@ -4,9 +4,16 @@ import styled from "styled-components";
 import Template from "../components/Template";
 import profile from "../assets/img/profile.jpeg";
 import { RootStore } from "../Store";
+import client from "../lib/api/client";
 
 function Mypage() {
+
+  const user_id = useSelector((state:RootStore) => state.userService.user?.user_id);
   const user_nick = useSelector((state:RootStore) => state.userService.user?.user_nick);
+
+  //FIXME
+  let res= client.get(`/ListMyStudyRoom/${user_id}`);
+  console.log("res",res);
 
   console.log(user_nick);
   return (

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Chatting from "../components/Chatting"
 import WindowShare from "../components/WindowShare";
 import StudyRoomBottomUtil from "../components/StudyRoomBottomUtil";
 import Template from "../components/Template";
+import { RootStore } from "../Store";
+import { useDispatch, useSelector } from "react-redux";
+import { enterStudyroom } from "../modules/studyroom/Actions";
+import rootReducer from "../modules";
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,6 +44,13 @@ const Wrapper = styled.div`
 `;
 
 function StudyRoom() {
+  const user_id = useSelector((state:RootStore) => state.userService.user?.user_id);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    // dispatch(enterStudyroom({user_id,}))
+  },[]);
+
+
   const [onShare, setOnShare] = useState<boolean>(false);
   const onShareClick = () => {
     setOnShare(!onShare);

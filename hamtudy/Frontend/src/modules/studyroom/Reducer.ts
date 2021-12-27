@@ -39,6 +39,15 @@ const studyRoom = (state:DefaultState=studyroomState,action:ActionTypes.StudyRoo
                 studyrooms:action.payload
             }
         }
+
+        case ActionTypes.ENTER_STUDYROOM:{
+            return{
+                ...state,
+            }
+        };
+
+   
+
         default:
             return state;
     }
